@@ -1,6 +1,6 @@
 
 
-avalonApp.directive('panel', function() {
+wzrdfrmApp.directive('panel', function() {
     return {
         templateUrl: 'pages/templates/panel-directive-template.html',
         restrict: 'E',

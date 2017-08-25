@@ -6,7 +6,7 @@
  * scopeFilter = [];
  */
 
-avalonApp.directive('listFilter', function($compile, $interpolate) {
+wzrdfrmApp.directive('listFilter', function($compile, $interpolate) {
     return {
         restrict: 'E',
         scope: {

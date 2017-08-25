@@ -1,5 +1,5 @@
 
-avalonApp.controller('editUserController', function(APIService, $scope, $window, $location, $routeParams) {
+wzrdfrmApp.controller('editUserController', function(APIService, $scope, $window, $location, $routeParams) {
 
     $scope.user = {};
 

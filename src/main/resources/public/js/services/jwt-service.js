@@ -1,5 +1,5 @@
 
-avalonApp.factory('JwtService', function($window, $location, $log) {
+wzrdfrmApp.factory('JwtService', function($window, $location, $log) {
     return {
         getUserName: function() {
             var subject = this.parseJwt();

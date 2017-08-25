@@ -1,6 +1,6 @@
 
 
-avalonApp.controller('hqController', function(APIService, $scope, $routeParams, $window, $location) {
+wzrdfrmApp.controller('hqController', function(APIService, $scope, $routeParams, $window, $location) {
     $scope.char;
 
     $scope.scopeOptions = [{'label': 'hello', 'filter': 'BODY'}, {'label': 'world', 'filter': 'LEFT_HAND'}];

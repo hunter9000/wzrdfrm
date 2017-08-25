@@ -1,2 +1,2 @@
-CREATE DATABASE `avalon`;
+CREATE DATABASE `wzrdfrm`;
 

@@ -1,4 +1,4 @@
-USE avalon;
+USE wzrdfrm;
 
 CREATE TABLE `sql_files` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,

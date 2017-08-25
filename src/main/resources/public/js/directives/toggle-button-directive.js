@@ -1,6 +1,6 @@
 /** data has properties: label, image, filter, selected */
 
-avalonApp.directive('toggleButton', function() {
+wzrdfrmApp.directive('toggleButton', function() {
     return {
         restrict: 'E',
         scope: {

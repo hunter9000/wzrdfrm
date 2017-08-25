@@ -1,6 +1,6 @@
 
 
-avalonApp.controller('profileController', function(APIService, $scope, $routeParams, $window, $location){
+wzrdfrmApp.controller('profileController', function(APIService, $scope, $routeParams, $window, $location){
 	$scope.user = {};
 
     $scope.roles = [];

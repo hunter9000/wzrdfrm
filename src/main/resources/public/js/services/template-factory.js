@@ -1,6 +1,6 @@
 
 
-avalonApp.factory('TemplateService', function ($http) {
+wzrdfrmApp.factory('TemplateService', function ($http) {
 //    var getTemplate = function (content) {
 //        return $http.get('templates/' + content + '.html');
 //    };

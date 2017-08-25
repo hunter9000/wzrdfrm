@@ -1,5 +1,5 @@
 
-avalonApp.controller('usersController', function($scope, $window, $http, $location) {
+wzrdfrmApp.controller('usersController', function($scope, $window, $http, $location) {
 
     $scope.users = [];
 

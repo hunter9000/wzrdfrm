@@ -1,6 +1,6 @@
 
 // create the controller and inject Angular's $scope
-avalonApp.controller('mainController', function($scope, $location, $window, $log, JwtService) {
+wzrdfrmApp.controller('mainController', function($scope, $location, $window, $log, JwtService) {
     // create a message to display in our view
     $scope.message = 'main';
 
@@ -28,10 +28,9 @@ avalonApp.controller('mainController', function($scope, $location, $window, $log
 
         if (token === 'undefined' || token === null || token == null || token == 'null') {
             $location.path('/login');
-            $log.debug('redirecting');
         }
         else {
-            $location.path('/charselect');
+            $location.path('/farm');
         }
     };
     init();

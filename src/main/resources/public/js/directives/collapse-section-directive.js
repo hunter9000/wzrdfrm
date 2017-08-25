@@ -1,5 +1,5 @@
 
-avalonApp.directive('pfCollapseSection', function() {
+wzrdfrmApp.directive('pfCollapseSection', function() {
 	return {
 		template:
 			'<div class="panel panel-default" id="panel2"> \
@@ -24,7 +24,7 @@ avalonApp.directive('pfCollapseSection', function() {
 	}
 });
 
-avalonApp.directive('pfCollapseSectionHeader', function() {
+wzrdfrmApp.directive('pfCollapseSectionHeader', function() {
 	return {
 		template:
 			'<div class="panel-heading"> \
@@ -47,7 +47,7 @@ avalonApp.directive('pfCollapseSectionHeader', function() {
 	}
 });
 
-avalonApp.directive('pfCollapseSectionBody', function() {
+wzrdfrmApp.directive('pfCollapseSectionBody', function() {
 	return {
 		template:
 			'<div id="{{id}}" ng-class="{in: !initialCollapsed, \'panel-collapse\': true, collapse: true}" > \

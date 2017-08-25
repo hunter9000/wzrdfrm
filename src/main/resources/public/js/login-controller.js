@@ -1,6 +1,6 @@
 
 // create the controller and inject Angular's $scope
-avalonApp.controller('loginController', function(APIService, $scope, $location, $window) {
+wzrdfrmApp.controller('loginController', function(APIService, $scope, $location, $window) {
     // create a message to display in our view
     $scope.message = '';
 

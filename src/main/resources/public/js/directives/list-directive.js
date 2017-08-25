@@ -1,5 +1,5 @@
 
-avalonApp.directive('list', function($compile, $interpolate) {
+wzrdfrmApp.directive('list', function($compile, $interpolate) {
     return {
         restrict: 'E',
         scope: {
@@ -20,7 +20,7 @@ avalonApp.directive('list', function($compile, $interpolate) {
         }
     }
 });
-avalonApp.directive('element', function($compile, $interpolate, TemplateService) {
+wzrdfrmApp.directive('element', function($compile, $interpolate, TemplateService) {
     return {
         restrict: 'E',
         scope: {

@@ -1,5 +1,5 @@
 
-avalonApp.controller('newUserController', function($scope, $window, $http, $location) {
+wzrdfrmApp.controller('newUserController', function($scope, $window, $http, $location) {
     $scope.user = {
         roles: []
     };       // user object to build and pass to server

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!-- define angular app -->
-<html ng-app="avalonApp">
+<html ng-app="wzrdfrmApp">
 
 <head>
     <!-- SCROLLS -->
@@ -37,44 +37,28 @@
     <script src="js/services/template-factory.js"></script>
     <script src="js/services/api-service.js"></script>
     <script src="js/services/jwt-service.js"></script>
-    <script src="js/services/inventory-service.js"></script>
-    <script src="js/services/item-service.js"></script>
-    <script src="js/services/image-service.js"></script>
 
     <!-- directives -->
     <script src="bower_components/checklist-model/checklist-model.js"></script>
     <script src="js/directives/list-directive.js"></script>
-    <script src="js/directives/material-directive.js"></script>
-    <script src="js/directives/material-add-directive.js"></script>
     <script src="js/directives/user-info-directive.js"></script>
     <script src="js/directives/collapse-section-directive.js"></script>
     <script src="js/directives/panel-directive.js"></script>
     <script src="js/directives/list-filter-directive.js"></script>
     <script src="js/directives/toggle-button-directive.js"></script>
-    <script src="js/directives/inventory-material-directive.js"></script>
-    <script src="js/directives/paper-doll-directive.js"></script>
-    <script src="js/directives/dungeon-map-directive.js"></script>
 
     <!-- controllers -->
     <script src="js/admin/edit-user-controller.js"></script>
-    <script src="js/admin/material-controller.js"></script>
     <script src="js/admin/new-user-controller.js"></script>
     <script src="js/admin/users-controller.js"></script>
 
-    <script src="js/edit-char-controller.js"></script>
-    <script src="js/char-controller.js"></script>
-    <script src="js/crafting-controller.js"></script>
-    <script src="js/dungeon-controller.js"></script>
     <script src="js/error-controller.js"></script>
     <script src="js/hq-controller.js"></script>
-    <script src="js/inventory-controller.js"></script>
     <script src="js/login-controller.js"></script>
     <script src="js/main-controller.js"></script>
-    <!--<script src="js/new-char-controller.js"></script>-->
-    <script src="js/portals-controller.js"></script>
     <script src="js/profile-controller.js"></script>
+    <script src="js/farm-controller.js"></script>
 
-    <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script>
 
 </head>
 
@@ -116,9 +100,6 @@
                         </a></li>
                         <li><a href="#/users" ng-show="isAdmin()"><span class="glyphicon glyphicon-user"></span>
                             Users
-                        </a></li>
-                        <li><a href="#/materials" ng-show="isAdmin()">
-                            Materials
                         </a></li>
 
                         <li role="separator" class="divider" ng-show="isAdmin()"></li>
