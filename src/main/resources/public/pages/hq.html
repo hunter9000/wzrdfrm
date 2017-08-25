@@ -1,0 +1,30 @@
+
+<div class="container">
+
+    <p>{{ message }}</p>
+
+    <panel header="HQ">
+
+        <a class="btn" ng-click="goToInventory()" >Inventory</a>
+
+        <br/>
+
+        <a class="btn" ng-click="goToCrafting()" >Crafting</a>
+
+        <br/>
+
+        <a class="btn" ng-click="goToDungeon()" ng-show="char.currentMap">Dungeon</a>
+        <a class="btn" ng-click="goToPortals()" ng-hide="char.currentMap">Portals</a>
+
+        <br/>
+
+        Current Map:
+        {{char.currentMap}}
+
+
+    </panel>
+
+
+    {{char}}
+
+</div>

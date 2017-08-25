@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="hunter (generated)" id="1462653863676-1">
+        <createTable tableName="cell">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cellPK"/>
+            </column>
+            <column name="groundType" type="VARCHAR(255)"/>
+            <column name="cell_x" type="INT"/>
+            <column name="cell_y" type="INT"/>
+            <column name="map_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-2">
+        <createTable tableName="character_recipe">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="character_recipePK"/>
+            </column>
+            <column name="char_id" type="BIGINT"/>
+            <column name="recipe_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-3">
+        <createTable tableName="characters">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="charactersPK"/>
+            </column>
+            <column name="map_x" type="INT"/>
+            <column name="map_y" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="curr_map_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-4">
+        <createTable tableName="equipment_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="equipment_itemPK"/>
+            </column>
+            <column name="char_id" type="BIGINT"/>
+            <column name="item_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-5">
+        <createTable tableName="inventory_material">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="inventory_materialPK"/>
+            </column>
+            <column name="quantity" type="INT"/>
+            <column name="char_id" type="BIGINT"/>
+            <column name="material_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-6">
+        <createTable tableName="item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="itemPK"/>
+            </column>
+            <column name="body_slot" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-7">
+        <createTable tableName="item_effect">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="item_effectPK"/>
+            </column>
+            <column name="equipment_id" type="BIGINT"/>
+            <column name="material_effect_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-8">
+        <createTable tableName="map">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="mapPK"/>
+            </column>
+            <column name="boss_level" type="BOOLEAN"/>
+            <column name="char_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-9">
+        <createTable tableName="map_edge">
+            <column name="enter_map_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exit_map_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-10">
+        <createTable tableName="material">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="materialPK"/>
+            </column>
+            <column name="icon" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-11">
+        <createTable tableName="material_effect">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="material_effectPK"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="slot" type="VARCHAR(255)"/>
+            <column name="val" type="INT"/>
+            <column name="material_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-12">
+        <createTable tableName="recipe">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="recipePK"/>
+            </column>
+            <column name="extra_capacity" type="INT"/>
+            <column name="item_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-13">
+        <createTable tableName="recipe_requirement">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="recipe_requirementPK"/>
+            </column>
+            <column name="quantity" type="INT"/>
+            <column name="material_id" type="BIGINT"/>
+            <column name="recipe_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-14">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="rolePK"/>
+            </column>
+            <column name="role_name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-15">
+        <createTable tableName="user_role">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-16">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-17">
+        <addPrimaryKey columnNames="user_id, role_id" tableName="user_role"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-18">
+        <addUniqueConstraint columnNames="exit_map_id" tableName="map_edge"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-19">
+        <addUniqueConstraint columnNames="role_name" constraintName="UC_ROLEROLE_NAME_COL" tableName="role"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-20">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-21">
+        <addUniqueConstraint columnNames="username" constraintName="UC_USERSUSERNAME_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-22">
+        <addForeignKeyConstraint baseColumnNames="map_id" baseTableName="cell" constraintName="FK_29u9ni1kogh5hg64wknfshnvr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="map"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-23">
+        <addForeignKeyConstraint baseColumnNames="equipment_id" baseTableName="item_effect" constraintName="FK_3h0p4sj6ttkc4wqx30396wucf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="equipment_item"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-24">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="characters" constraintName="FK_3r882i418xbsbcayej5g1gowx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-25">
+        <addForeignKeyConstraint baseColumnNames="recipe_id" baseTableName="character_recipe" constraintName="FK_42nk68mq6w8f3ppxpf3jnmc8u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="recipe"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-26">
+        <addForeignKeyConstraint baseColumnNames="material_effect_id" baseTableName="item_effect" constraintName="FK_4hydy8fpfc1ja4j83j5iero7x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="material_effect"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-27">
+        <addForeignKeyConstraint baseColumnNames="enter_map_id" baseTableName="map_edge" constraintName="FK_6xd1b3lc25x6e4iuka3sjx9wk" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="map"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-28">
+        <addForeignKeyConstraint baseColumnNames="material_id" baseTableName="material_effect" constraintName="FK_723aryaw1as6ihgj6ch2ogi14" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="material"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-29">
+        <addForeignKeyConstraint baseColumnNames="item_id" baseTableName="recipe" constraintName="FK_7d6t52l3orld2foqgoi45qisv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="item"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-30">
+        <addForeignKeyConstraint baseColumnNames="char_id" baseTableName="character_recipe" constraintName="FK_8xu3xiyumhckt5rd36k026l8h" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="characters"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-31">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_role" constraintName="FK_apcc8lxk2xnug8377fatvbn04" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-32">
+        <addForeignKeyConstraint baseColumnNames="material_id" baseTableName="recipe_requirement" constraintName="FK_cuvx0xtu5vu7s7gas0uhcv0nl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="material"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-33">
+        <addForeignKeyConstraint baseColumnNames="char_id" baseTableName="equipment_item" constraintName="FK_gnln6ym65mfbkt2kik93le9am" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="characters"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-34">
+        <addForeignKeyConstraint baseColumnNames="char_id" baseTableName="map" constraintName="FK_hv7rnaxnoy9w6kx77u0onx7bi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="characters"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-35">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="user_role" constraintName="FK_it77eq964jhfqtu54081ebtio" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-36">
+        <addForeignKeyConstraint baseColumnNames="material_id" baseTableName="inventory_material" constraintName="FK_leim1ru6c3efkqsgsfi43d9bo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="material"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-37">
+        <addForeignKeyConstraint baseColumnNames="exit_map_id" baseTableName="map_edge" constraintName="FK_nodpg54q1ddbmkrdn7eomvtfl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="map"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-38">
+        <addForeignKeyConstraint baseColumnNames="item_id" baseTableName="equipment_item" constraintName="FK_p8j9tkx5eiptbrx84abhhn5v8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="item"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-39">
+        <addForeignKeyConstraint baseColumnNames="char_id" baseTableName="inventory_material" constraintName="FK_ppmog95nvjd7j1hd126nhyhh9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="characters"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-40">
+        <addForeignKeyConstraint baseColumnNames="recipe_id" baseTableName="recipe_requirement" constraintName="FK_t568mtnmmu1u5spbai32j0vhg" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="recipe"/>
+    </changeSet>
+    <changeSet author="hunter (generated)" id="1462653863676-41">
+        <addForeignKeyConstraint baseColumnNames="curr_map_id" baseTableName="characters" constraintName="FK_tml8qvj6k5l5x7fvyym6cmwaw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="map"/>
+    </changeSet>
+
+    <changeSet author="hunter" id="create default user">
+        <insert tableName="users">
+            <column name="id" value="1"/>
+            <column name="username" value="hunter"/>
+            <column name="password" value="$2a$10$YBd.jCtCn7dh5Ps.n/c80efTzq5jUgepAvNV5DsuXnx.c0NaRnTJa"/>
+            <column name="email" value="hunter9000@gmail.com" />
+        </insert>
+
+        <insert tableName="role">
+            <column name="id" value="1"/>
+            <column name="role_name" value="PLAYER"/>
+        </insert>
+        <insert tableName="role">
+            <column name="id" value="2"/>
+            <column name="role_name" value="ADMIN"/>
+        </insert>
+
+        <insert tableName="user_role">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="user_role">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="2"/>
+        </insert>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>
+

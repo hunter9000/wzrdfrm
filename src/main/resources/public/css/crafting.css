@@ -1,0 +1,15 @@
+
+.equipment-list {
+    width:300px;
+    height:300px;
+}
+.equipment-item {
+    height:30px;
+    border-color: #ccc !important;
+    background-color: #ddf;
+}
+
+.inv-material-item, .recipe-item {
+    /*background-color: indianred;*/
+    border: 1px solid darkgray;
+}

@@ -1,0 +1,14 @@
+
+<panel header="Characters">
+
+	<div ng-repeat="c in chars">
+		<span>Char Id ({{c.id}})</span>
+		<span>Char Name {{c.name}} </span>
+
+		<!--<a href="#hq/{{c.id}}" >Play!</a>-->
+		<a ng-click="selectChar(c.id)">Play</a>
+	</div>
+
+	<button ng-click="newChar()">New Character</button>
+
+</panel>

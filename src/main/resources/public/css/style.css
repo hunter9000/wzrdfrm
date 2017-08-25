@@ -1,0 +1,157 @@
+/** list box directive */
+/*div.scroll-list {
+    overflow-y:scroll;
+    border: 1px solid #333
+}
+div.scroll-list-inner {
+    border-right: 1px solid #333;
+}
+div.scroll-item {
+    width:100%;
+    border-bottom: 1px solid #333;
+}*/
+
+.scroll-container {
+    overflow-y: scroll;
+}
+.medium-height {
+    height: 300px;
+}
+/*.small-height {
+    min-height: 48px !important;
+}*/
+
+.panel-body md-list {
+    margin: 0px;
+    padding: 0px;
+}
+
+.toggle-button {
+    color: gray;
+    padding: 0px;
+    margin: 0px;
+}
+
+.toggle-button-selected {
+    color: green;
+    background-color: lightgreen;
+}
+
+.toggle-button-icon {
+    width: 20px;
+    height: 20px;
+}
+
+
+.icon-md {
+    width: 30px;
+    height: 30px;
+}
+
+/** Paper doll */
+.paper-doll {
+    height:400px;
+    width: 320px;
+    margin:auto;
+    border: 1px solid black;
+}
+
+.paper-doll-wrapper {
+    position:relative;
+
+}
+
+.paper-doll-img {
+
+}
+
+.paper-doll-slot {
+    position: absolute;
+    border: 1px solid black;
+}
+
+.paper-doll-body {
+    top: 100px;
+    left: 130px;
+    width: 60px;
+    height: 100px;
+}
+
+.paper-doll-left-hand {
+    top: 100px;
+    left: 30px;
+    width: 60px;
+    height: 100px;
+}
+
+.paper-doll-right-hand {
+    top: 100px;
+    left: 230px;
+    width: 60px;
+    height: 100px;
+}
+
+.paper-doll-head {
+    top: 20px;
+    left: 130px;
+    width: 60px;
+    height: 60px;
+}
+
+.paper-doll-legs {
+    top: 220px;
+    left: 130px;
+    width: 60px;
+    height: 60px;
+}
+
+.paper-doll-feet {
+    top: 300px;
+    left: 130px;
+    width: 60px;
+    height: 60px;
+}
+.paper-doll-gloves {
+    top: 220px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+}
+.paper-doll-ring {
+    top: 300px;
+    left: 60px;
+    width: 30px;
+    height: 30px;
+}
+.paper-doll-neck {
+    top: 50px;
+    left: 230px;
+    width: 30px;
+    height: 30px;
+}
+.paper-doll-consumable {
+    top: 220px;
+    left: 230px;
+    width: 60px;
+    height: 60px;
+}
+
+.canvas-hider {
+    z-index: 100;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.dungeon-canvas {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+}
+
+.dungeon-wrapper {
+    display: inline-block;
+    position: relative;
+}

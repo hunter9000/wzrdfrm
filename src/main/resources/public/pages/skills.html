@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://code.createjs.com/createjs-2015.05.21.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <script>
+        var stage;
+        var offset;
+        var color = "#ddd";
+
+        function init() {
+            stage = new createjs.Stage("canvas");
+
+            createjs.Ticker.setFPS(60);
+            createjs.Ticker.addEventListener("tick", stage);
+
+            preload = new createjs.LoadQueue(true);
+            preload.addEventListener("fileload", handleFileComplete);
+            preload.loadFile("layout.json");
+        };
+
+        function handleFileComplete(event) {
+            console.log(event.result);
+            //document.write(event.rawResult);
+
+            createIcons(event.result);
+            createLines(event.result);
+        }
+
+        function createLines(node) {
+            for (var i = 0; i < node.children.length; i++) {
+                var childNode = node.children[i];
+                line = drawLine(node, childNode);
+                if (node.circle.childLines == undefined) {
+                    node.circle.childLines = [];
+                }
+                if (childNode.circle.parentLines == undefined) {
+                    childNode.circle.parentLines = [];
+                }
+                node.circle.childLines.push(line);
+                childNode.circle.parentLines.push(line);
+                line.parentCircle = node.circle;
+                line.childCircle = childNode.circle;
+            }
+        }
+
+        function createIcons(node) {
+            var circle = new createjs.Shape();
+            circle.graphics.beginFill(color).drawCircle(node.x, node.y, 10);
+            circle.addEventListener("mousedown", function(event) {
+                offset = {
+                    x: event.nativeEvent.x - event.target.x,
+                    y: event.nativeEvent.y - event.target.y
+                };
+                console.log(offset);
+            });
+            circle.addEventListener("pressmove", function(event) {
+                //alert("pressmove");
+                circle.x = event.rawX + offset.x;
+                circle.y = event.rawY + offset.y;
+                //click, mousedown, mouseup, dblclick, pressmove, pressup, mouseover / mouseout, and rollover / rollout.
+            });
+            circle.addEventListener("pressup", function(event) {
+                // for each childLine
+                if (circle.childLines != undefined) {
+                    for (i=0; i<circle.childLines.length; i++) {
+                        var line = circle.childLines[i];
+                        g = line.graphics;
+                        g._instructions[1].x = circle.x;        // moveto
+                        g._instructions[1].y = circle.y;        // moveto
+                    }
+                }
+                if (circle.parentLines != undefined) {
+                    for (i=0; i<circle.parentLines.length; i++) {
+                        var line = circle.parentLines[i];
+                        g = line.graphics;
+                        g._instructions[2].x = circle.x;        // lineto
+                        g._instructions[2].y = circle.y;        // lineto
+                    }
+                }
+                    //setLine(g, 1, 1, 20, 20);
+                    // get the line's
+                    //g._instructions[1].x = circle.x;        // moveto
+                    //g._instructions[1].y = circle.y;        // moveto
+                    //g._instructions[2].x =  100;        // lineto
+            });
+            circle.node = node;
+            stage.addChild(circle);
+            node.circle = circle;
+
+            for (var i = 0; i < node.children.length; i++) {
+                console.log(node.children[i]);
+                createIcons(node.children[i]);
+            }
+        }
+        function drawLine(node1, node2) {
+            var line = new createjs.Shape();
+            setLine(line.graphics, node1.x, node1.y, node2.x, node2.y);
+            stage.addChild(line);
+            return line;
+        }
+
+        function setLine(graphics, x1, y1, x2, y2) {
+            graphics.clear();
+            graphics.setStrokeStyle(3);
+            graphics.beginStroke(color);
+            graphics.moveTo(x1, y1);
+            graphics.lineTo(x2, y2);
+            graphics.endStroke();
+        }
+
+    </script>
+
+</head>
+<body onload="init();">
+
+<canvas id="canvas">
+
+</canvas>
+
+</body>
+</html>
