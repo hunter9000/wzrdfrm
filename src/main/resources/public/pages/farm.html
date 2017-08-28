@@ -1,7 +1,28 @@
 
-<div ng-show="farm">
-    {{farm}}
-    <button ng-click="deleteFarm()">Delete</button>
-</div>
+<div class="container width-large">
 
-<button ng-hide="farm" ng-click="createFarm()">Create</button>
+    <div ng-show="farm">
+        {{farm}}
+
+        <div class="plot-row-wrapper" ng-repeat="plotRow in farm.farmPlots">
+            <div class="plot-wrapper" ng-repeat="plot in plotRow">
+                <div ng-show="plot.plantType">
+                    <span>Plant: {{plot.plantType}}</span>
+                    <span>Date: {{plot.plantDate | date:'MM-dd-yyyy HH:mm:ss'}}</span>
+                    <button class="btn" ng-click="harvest(plot)">Harvest</button>
+                </div>
+
+                <button class="btn" ng-hide="plot.plantType" ng-click="plant(plot)">
+                    Plant grass
+                </button>
+            </div>
+        </div>
+
+        {{harvestedMaterials}}
+
+        <button class="btn btn-secondary" ng-click="deleteFarm()">Delete</button>
+    </div>
+
+    <button class="btn btn-primary" ng-hide="farm" ng-click="createFarm()">Create</button>
+
+</div>

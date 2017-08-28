@@ -2,7 +2,6 @@ package wzrdfrm.model.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import wzrdfrm.model.farm.Farm;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -32,10 +31,8 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) })
     private Set<Role> roles;
 
-    @OneToOne
-    @JoinColumn(name = "farm")
-    private Farm farm;
-
+//    @OneToOne(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private Farm farm;
 
     public Long getId() {
         return id;
@@ -73,11 +70,11 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-    public Farm getFarm() {
-        return farm;
-    }
-    public void setFarm(Farm farm) {
-        this.farm = farm;
-    }
+//
+//    public Farm getFarm() {
+//        return farm;
+//    }
+//    public void setFarm(Farm farm) {
+//        this.farm = farm;
+//    }
 }

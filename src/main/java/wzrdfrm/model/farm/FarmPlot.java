@@ -1,5 +1,7 @@
 package wzrdfrm.model.farm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,9 +16,15 @@ public class FarmPlot {
 
     @OneToOne
     @JoinColumn(name = "farm", nullable = false, updatable = false)
+    @JsonIgnore
     private Farm farm;
 
-//    ADD COLUMN `plant_date` TIMESTAMP NULL;
+    // the coordinates in the farm of this plot
+    @Column(name = "row", nullable = false, updatable = false)
+    private Integer row;
+    @Column(name = "col", nullable = false, updatable = false)
+    private Integer col;
+
     @Temporal(value = TemporalType.TIMESTAMP)
     @Column(name = "plant_date")
     private Date plantDate = null;
@@ -24,6 +32,10 @@ public class FarmPlot {
     @Column(name = "plant_type")
     @Enumerated(EnumType.STRING)
     private PlantType plantType;
+
+    @Column(name = "unlocked", nullable = false)
+    private Boolean unlocked = false;
+
 
     public Long getId() {
         return id;
@@ -37,6 +49,27 @@ public class FarmPlot {
     }
     public void setFarm(Farm farm) {
         this.farm = farm;
+    }
+
+    public Integer getRow() {
+        return row;
+    }
+    public void setRow(Integer row) {
+        this.row = row;
+    }
+
+    public Integer getCol() {
+        return col;
+    }
+    public void setCol(Integer col) {
+        this.col = col;
+    }
+
+    public Boolean getUnlocked() {
+        return unlocked;
+    }
+    public void setUnlocked(Boolean unlocked) {
+        this.unlocked = unlocked;
     }
 
     public Date getPlantDate() {

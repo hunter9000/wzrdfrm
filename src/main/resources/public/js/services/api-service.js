@@ -92,5 +92,12 @@ wzrdfrmApp.factory('APIService', function($window, $location, $http, $log) {
 		deleteFarm: function(successCallback) {
 		    deleteCall('/api/farm/', successCallback);
 		},
+
+		plantCrop: function(plotId, plantCropRequest, successCallback) {
+		    put('/api/farm/plot/'+plotId+'/plant/', plantCropRequest, successCallback);
+		},
+		harvestCrop: function(plotId, successCallback) {
+		    put('/api/farm/plot/'+plotId+'/harvest/', {}, successCallback);
+		},
     };
 });

@@ -1,7 +1,7 @@
 package wzrdfrm.model.farm;
 
 public enum PlantType {
-    WEED,
+    WEEDS,
     GRASS,
     FERN,
     POTATO,

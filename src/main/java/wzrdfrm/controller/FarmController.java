@@ -2,16 +2,17 @@ package wzrdfrm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import wzrdfrm.manager.FarmManager;
 import wzrdfrm.model.farm.Farm;
 import wzrdfrm.model.farm.FarmPlot;
 import wzrdfrm.model.user.User;
 import wzrdfrm.repository.FarmRepository;
 import wzrdfrm.repository.UserRepository;
+import wzrdfrm.request.PlantCropRequest;
 import wzrdfrm.util.AuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 public class FarmController {
@@ -33,34 +34,69 @@ public class FarmController {
 //        return farm;
 //    }
 
-    @RequestMapping(name = "/api/farm/", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/farm/", method = RequestMethod.GET)
     public Farm getFarmOwnedByUser() {
         User user = AuthUtils.getLoggedInUser(request);
-        return user.getFarm();
+        return farmRepository.findAllByOwner(user);
     }
 
-    @RequestMapping(name = "/api/farm/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/farm/", method = RequestMethod.DELETE)
 //    @FarmOwnerRequired
     public void deleteFarm() {
         User user = AuthUtils.getLoggedInUser(request);
-        user.setFarm(null);
-        userRepository.save(user);
+
+        Farm farm = farmRepository.findAllByOwner(user);
+
+        farmRepository.delete(farm);
     }
 
-    @RequestMapping(name = "/api/farm/", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/farm/", method = RequestMethod.POST)
     public Long createFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
-        Farm farm = new Farm();
-        user.setFarm(farm);
-        Set<FarmPlot> farmPlots = new HashSet<>();
-        FarmPlot plot = new FarmPlot();
-        plot.setFarm(farm);
-        farmPlots.add(plot);
-        farm.setFarmPlots(farmPlots);
+        Farm farm = FarmManager.createFarm(user);
 
         farmRepository.save(farm);
         return farm.getId();
+    }
+
+    @RequestMapping(value = "/api/farm/plot/{plotId}/plant/", method = RequestMethod.PUT)
+    public FarmPlot plantCrop(@RequestBody PlantCropRequest plantCropRequest, @PathVariable Long plotId) {
+        User user = AuthUtils.getLoggedInUser(request);
+        Farm farm = farmRepository.findAllByOwner(user);
+
+        FarmManager farmManager = new FarmManager(farm);
+
+//        if (plantCropRequest.requestType == PlantCropRequest.RequestType.PLANT) {
+        FarmPlot farmPlot = farmManager.plantCrop(plotId, plantCropRequest.plantType);
+//        }
+//        else if (plantCropRequest.requestType == PlantCropRequest.RequestType.HARVEST) {
+//            farmPlot = farmManager.harvestCrop(plotId);
+//        }
+
+        farmRepository.save(farm);
+
+        return farmPlot;
+    }
+
+
+    @RequestMapping(value = "/api/farm/plot/{plotId}/harvest/", method = RequestMethod.PUT)
+    public List<Object> harvestCrop(@PathVariable Long plotId) {
+        User user = AuthUtils.getLoggedInUser(request);
+        Farm farm = farmRepository.findAllByOwner(user);
+
+        FarmManager farmManager = new FarmManager(farm);
+
+//        if (plantCropRequest.requestType == PlantCropRequest.RequestType.PLANT) {
+//        FarmPlot farmPlot = farmManager.plantCrop(plotId, plantCropRequest.plantType);
+//        }
+//        else if (plantCropRequest.requestType == PlantCropRequest.RequestType.HARVEST) {
+        List<Object> harvestedMaterials = farmManager.harvestCrop(plotId);
+//        }
+
+        farmRepository.save(farm);
+
+        return harvestedMaterials;
     }
 
 }
