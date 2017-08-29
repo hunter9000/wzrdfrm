@@ -6,6 +6,12 @@ wzrdfrmApp.factory('FarmService', function() {
             return {
                 'plantType': plantType
             };
+        },
+
+        getCharClassRequest: function(charClassId) {
+            return {
+                'charClassId': charClassId
+            }
         }
     };
 

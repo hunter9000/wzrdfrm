@@ -1,6 +1,7 @@
 package wzrdfrm.model.farm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.user.User;
 
 import javax.persistence.*;
@@ -24,6 +25,13 @@ public class Farm {
     @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<FarmPlot> farmPlots;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "curr_char_class")       // allowed to be nullable because of cycle in farm <-> charclass mapping
+    private CharClass currCharClass;
+
+//    @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private Set<CharClass> charClasses;
 
     public Long getId() {
         return id;
@@ -45,4 +53,18 @@ public class Farm {
     public void setFarmPlots(Set<FarmPlot> farmPlots) {
         this.farmPlots = farmPlots;
     }
+
+    public CharClass getCurrCharClass() {
+        return currCharClass;
+    }
+    public void setCurrCharClass(CharClass currCharClass) {
+        this.currCharClass = currCharClass;
+    }
+
+//    public Set<CharClass> getCharClasses() {
+//        return charClasses;
+//    }
+//    public void setCharClasses(Set<CharClass> charClasses) {
+//        this.charClasses = charClasses;
+//    }
 }

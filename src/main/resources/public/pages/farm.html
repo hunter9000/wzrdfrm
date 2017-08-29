@@ -1,5 +1,5 @@
 
-<div class="container width-large">
+<div class="container">
 
     <div ng-show="farm">
         {{farm}}
@@ -18,7 +18,17 @@
             </div>
         </div>
 
-        {{harvestedMaterials}}
+        <div>
+            {{harvestedMaterials}}
+        </div>
+
+        <div>
+            Class: {{farm.currCharClass.charClassDefinition.name}}
+            Level: {{farm.currCharClass.currentLevel}}
+            XP: {{farm.currCharClass.currentXP}}
+        </div>
+
+        <button class="btn" ng-click="changeCharClass()">Change class</button>
 
         <button class="btn btn-secondary" ng-click="deleteFarm()">Delete</button>
     </div>

@@ -30,6 +30,8 @@ public class CharClass {
     @Column(name = "curr_level", nullable = false)
     private Integer currentLevel = 0;
 
+    @Column(name = "unlocked", nullable = false)
+    private Boolean unlocked = false;
 
     public Long getId() {
         return id;
@@ -64,5 +66,12 @@ public class CharClass {
     }
     public void setCurrentLevel(Integer currentLevel) {
         this.currentLevel = currentLevel;
+    }
+
+    public Boolean getUnlocked() {
+        return unlocked;
+    }
+    public void setUnlocked(Boolean unlocked) {
+        this.unlocked = unlocked;
     }
 }

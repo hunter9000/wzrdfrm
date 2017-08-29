@@ -99,5 +99,16 @@ wzrdfrmApp.factory('APIService', function($window, $location, $http, $log) {
 		harvestCrop: function(plotId, successCallback) {
 		    put('/api/farm/plot/'+plotId+'/harvest/', {}, successCallback);
 		},
+
+		getAllCharClasses: function(successCallback) {
+		    get('/api/farm/classes/', successCallback)
+		},
+		unlockCharClass: function(unlockRequest, successCallback) {
+		    post('/api/farm/classes/', unlockRequest, successCallback);
+		},
+		switchCharClass: function(unlockRequest, successCallback) {
+		    put('/api/farm/classes/', unlockRequest, successCallback);
+		},
+
     };
 });

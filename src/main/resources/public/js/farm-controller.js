@@ -1,5 +1,5 @@
 
-wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope, $routeParams, $location) {
+wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope, $location, $uibModal, $log) {
     $scope.farm;
 
     // get the character from the provided id
@@ -45,5 +45,27 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
             $location.path('/');
         });
     }
+
+
+    // opens a modal dialog to change char class
+    $scope.changeCharClass = function () {
+        var modalInstance = $uibModal.open({
+            animation: false,
+            templateUrl: 'pages/templates/char-class-change-template.html',
+            controller: 'CharClassChangeController',
+            size: 'lg',
+            resolve: { }
+        });
+
+        modalInstance.result.then(function () {
+            $log.debug('modal success');
+        }, function () {
+            $log.debug('Modal dismissed at: ' + new Date());
+            APIService.getAllCharClasses(function(response) {
+                $scope.farm.currCharClass = response.data.currCharClass;
+            });
+        });
+    };
+
 
 });

@@ -2,10 +2,15 @@ package wzrdfrm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import wzrdfrm.manager.CharClassManager;
 import wzrdfrm.manager.FarmManager;
+import wzrdfrm.model.classes.CharClass;
+import wzrdfrm.model.classes.CharClassDefinition;
 import wzrdfrm.model.farm.Farm;
 import wzrdfrm.model.farm.FarmPlot;
 import wzrdfrm.model.user.User;
+import wzrdfrm.repository.CharClassDefinitionRepository;
+import wzrdfrm.repository.CharClassRepository;
 import wzrdfrm.repository.FarmRepository;
 import wzrdfrm.repository.UserRepository;
 import wzrdfrm.request.PlantCropRequest;
@@ -13,6 +18,7 @@ import wzrdfrm.util.AuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class FarmController {
@@ -22,6 +28,12 @@ public class FarmController {
 
     @Autowired
     private FarmRepository farmRepository;
+
+    @Autowired
+    private CharClassDefinitionRepository charClassDefinitionRepository;
+
+    @Autowired
+    private CharClassRepository charClassRepository;
 
     @Autowired
     private HttpServletRequest request;
@@ -47,6 +59,10 @@ public class FarmController {
 
         Farm farm = farmRepository.findAllByOwner(user);
 
+        farm.setCurrCharClass(null);
+
+        charClassRepository.deleteByFarm(farm);
+
         farmRepository.delete(farm);
     }
 
@@ -55,6 +71,13 @@ public class FarmController {
         User user = AuthUtils.getLoggedInUser(request);
 
         Farm farm = FarmManager.createFarm(user);
+
+        farmRepository.save(farm);
+
+        Iterable<CharClassDefinition> classDefs = charClassDefinitionRepository.findAll();
+        Set<CharClass> newCharClasses = CharClassManager.createDefaultCharClasses(farm, classDefs);
+
+        charClassRepository.save(newCharClasses);
 
         farmRepository.save(farm);
         return farm.getId();

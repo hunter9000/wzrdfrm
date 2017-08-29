@@ -112,6 +112,9 @@ GET /api/farm/
 GET /api/farm/classes/
     get all classes info, unlock status, reqs, serverside calculated 'can be unlocked' flag
 
+GET /api/farm/classes/
+    get the info of all classes, with which are unlocked, which can be unlocked(cost and prereqs)
+
 PUT /api/farm/classes/
     change current class
 
