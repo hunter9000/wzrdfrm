@@ -31,9 +31,13 @@ public class FarmPlot {
     @Column(name = "plant_date")
     private Date plantDate = null;
 
-    @Column(name = "plant_type")
-    @Enumerated(EnumType.STRING)
-    private PlantType plantType;
+//    @Column(name = "plant_type")
+//    @Enumerated(EnumType.STRING)
+//    private PlantType plantType;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "plant")
+    private Plant plant;
 
     @Column(name = "unlocked", nullable = false)
     private Boolean unlocked = false;
@@ -90,10 +94,17 @@ public class FarmPlot {
         return null;
     }
 
-    public PlantType getPlantType() {
-        return plantType;
+//    public PlantType getPlantType() {
+//        return plantType;
+//    }
+//    public void setPlantType(PlantType plantType) {
+//        this.plantType = plantType;
+//    }
+
+    public Plant getPlant() {
+        return plant;
     }
-    public void setPlantType(PlantType plantType) {
-        this.plantType = plantType;
+    public void setPlant(Plant plant) {
+        this.plant = plant;
     }
 }

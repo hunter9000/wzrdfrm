@@ -33,6 +33,9 @@ public class Farm {
 //    @JsonIgnore
 //    private Set<CharClass> charClasses;
 
+    @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Seed> seedInventory;
+
     public Long getId() {
         return id;
     }
@@ -61,7 +64,14 @@ public class Farm {
         this.currCharClass = currCharClass;
     }
 
-//    public Set<CharClass> getCharClasses() {
+    public Set<Seed> getSeedInventory() {
+        return seedInventory;
+    }
+    public void setSeedInventory(Set<Seed> seedInventory) {
+        this.seedInventory = seedInventory;
+    }
+
+    //    public Set<CharClass> getCharClasses() {
 //        return charClasses;
 //    }
 //    public void setCharClasses(Set<CharClass> charClasses) {

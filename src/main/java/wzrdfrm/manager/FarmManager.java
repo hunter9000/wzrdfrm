@@ -1,9 +1,7 @@
 package wzrdfrm.manager;
 
 import org.apache.commons.collections4.IterableUtils;
-import wzrdfrm.model.farm.Farm;
-import wzrdfrm.model.farm.FarmPlot;
-import wzrdfrm.model.farm.PlantType;
+import wzrdfrm.model.farm.*;
 import wzrdfrm.model.user.User;
 import wzrdfrm.security.BadRequestException;
 
@@ -14,13 +12,15 @@ public class FarmManager {
     private static final int NUM_PLOT_ROWS = 2;
     private static final int NUM_PLOT_COLS = 2;
 
+    public static final String STARTING_SEED_PLANT_NAME = "Weeds";
+
     private Farm farm;
 
     public FarmManager(Farm farm) {
         this.farm = farm;
     }
 
-    public static Farm createFarm(User user) {
+    public static Farm createFarm(User user, Plant startingPlant) {
         Farm farm = new Farm();
         farm.setOwner(user);
 
@@ -37,20 +37,34 @@ public class FarmManager {
         }
         farm.setFarmPlots(farmPlots);
 
+        // create default seeds
+        Set<Seed> seeds = new HashSet<>();
+        Seed seed = new Seed();
+        seed.setPlant(startingPlant);
+        seed.setQuantity(5);
+        seed.setFarm(farm);
+        seeds.add(seed);
+        farm.setSeedInventory(seeds);
+
         return farm;
     }
 
-    public FarmPlot plantCrop(Long plotId, PlantType plantType) {
+    public FarmPlot plantCrop(Long plotId, Plant plant) {
+        // TODO check seed inventory for quantity
+
         FarmPlot farmPlot = getFarmPlotById(plotId);
         if (farmPlot == null) {
             throw new BadRequestException();
         }
 
-        if (farmPlot.getPlantType() != null) {
+        if (farmPlot.getPlant() != null) {
             throw new BadRequestException();
         }
-        farmPlot.setPlantType(plantType);
+        farmPlot.setPlant(plant);
         farmPlot.setPlantDate(new Date());
+
+        // TODO decrement the inventory here
+
         return farmPlot;
     }
 
@@ -60,7 +74,7 @@ public class FarmManager {
             throw new BadRequestException();
         }
 
-        if (farmPlot.getPlantType() == null) {
+        if (farmPlot.getPlant() == null) {
             throw new BadRequestException();
         }
 
@@ -69,7 +83,7 @@ public class FarmManager {
         harvestedMaterials.add(PlantType.WEEDS);
 
         farmPlot.setPlantDate(null);
-        farmPlot.setPlantType(null);
+        farmPlot.setPlant(null);
 
         return harvestedMaterials;
     }

@@ -8,12 +8,11 @@ import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.classes.CharClassDefinition;
 import wzrdfrm.model.farm.Farm;
 import wzrdfrm.model.farm.FarmPlot;
+import wzrdfrm.model.farm.Plant;
 import wzrdfrm.model.user.User;
-import wzrdfrm.repository.CharClassDefinitionRepository;
-import wzrdfrm.repository.CharClassRepository;
-import wzrdfrm.repository.FarmRepository;
-import wzrdfrm.repository.UserRepository;
+import wzrdfrm.repository.*;
 import wzrdfrm.request.PlantCropRequest;
+import wzrdfrm.security.BadRequestException;
 import wzrdfrm.util.AuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +33,9 @@ public class FarmController {
 
     @Autowired
     private CharClassRepository charClassRepository;
+
+    @Autowired
+    private PlantRepository plantRepository;
 
     @Autowired
     private HttpServletRequest request;
@@ -70,7 +72,9 @@ public class FarmController {
     public Long createFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
-        Farm farm = FarmManager.createFarm(user);
+        Plant startingPlant = plantRepository.findByName(FarmManager.STARTING_SEED_PLANT_NAME);
+
+        Farm farm = FarmManager.createFarm(user, startingPlant);
 
         farmRepository.save(farm);
 
@@ -90,8 +94,13 @@ public class FarmController {
 
         FarmManager farmManager = new FarmManager(farm);
 
+        Plant plant = plantRepository.findOne(plantCropRequest.plantId);
+        if (plant == null) {
+            throw new BadRequestException();
+        }
+
 //        if (plantCropRequest.requestType == PlantCropRequest.RequestType.PLANT) {
-        FarmPlot farmPlot = farmManager.plantCrop(plotId, plantCropRequest.plantType);
+        FarmPlot farmPlot = farmManager.plantCrop(plotId, plant);
 //        }
 //        else if (plantCropRequest.requestType == PlantCropRequest.RequestType.HARVEST) {
 //            farmPlot = farmManager.harvestCrop(plotId);

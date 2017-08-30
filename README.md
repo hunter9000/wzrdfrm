@@ -59,7 +59,7 @@ unlock this ability with a class (alchemist?)
 -- classes (5 levels per? keep it simple)
 
 Farm Hand - starter
-- 1 harvest more seeds
+- 1 harvest seeds? start without the ability to get seeds from harvested plants. make sure to start with enough to xp up to here
 - 2 faster grow times
 - 3
 - 4

@@ -2,9 +2,9 @@
 wzrdfrmApp.factory('FarmService', function() {
 
     return {
-        getPlantCropRequest: function(plantType) {
+        getPlantCropRequest: function(plant) {
             return {
-                'plantType': plantType
+                'plantId': plant.id
             };
         },
 

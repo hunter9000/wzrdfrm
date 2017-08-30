@@ -6,8 +6,8 @@
 
         <div class="plot-row-wrapper" ng-repeat="plotRow in farm.farmPlots">
             <div class="plot-wrapper" ng-repeat="plot in plotRow">
-                <div ng-show="plot.plantType">
-                    <span>Plant: {{plot.plantType}}</span>
+                <div ng-show="plot.plant">
+                    <span>Plant: {{plot.plant.name}}</span>
                     <span>Date: {{plot.plantDate | date:'MM-dd-yyyy HH:mm:ss'}}</span>
 
                     <!-- progress bar -->
@@ -23,7 +23,8 @@
                     </timer>
                 </div>
 
-                <button class="btn" ng-hide="plot.plantType" ng-click="plant(plot)">
+                <!-- TODO pass the correct plant selection from inventory here. -->
+                <button class="btn" ng-hide="plot.plantType" ng-click="plant(plot, plant)">
                     Plant grass
                 </button>
             </div>

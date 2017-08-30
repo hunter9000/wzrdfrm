@@ -24,8 +24,8 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
 //        return plantDate + 1000;
 //    }
 
-    $scope.plant = function(plot) {
-        var plantCropRequest = FarmService.getPlantCropRequest('GRASS');
+    $scope.plant = function(plot, plant) {
+        var plantCropRequest = FarmService.getPlantCropRequest(plant);
 
         APIService.plantCrop(plot.id, plantCropRequest, function(response) {
             var farmPlot = response.data;
