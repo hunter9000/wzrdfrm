@@ -20,9 +20,11 @@ ferns
 food
 grass
 trees
-water plants
+water plants (clams, kelp)
 flowers
 berries
+mushrooms
+crystals
 
 plants defined in db
     WEEDS,
@@ -61,21 +63,14 @@ Farm Hand - starter
 
 %%%%%%
 
-Fighter - Farm Hand req
-
---- Barbarian - Fighter req
-- shouts to make plants grow/produce more, rage at them plants!
-
---- Monk - Fighter req
-- chi powers to grow plants faster?
-
-%%%%%%
-
 Thief - Farm Hand req
 - steal more resources from plants?
 
 --- Ninja - Thief req
 - harvest double resources, take the goods without the plant even noticing!
+
+------ Pirate - Fighter & Thief req
+- grow water plants
 
 %%%%%%
 
@@ -83,7 +78,6 @@ Hunter - Farm Hand req
 - bonus to herbs?
 
 ---- Ranger - Hunter req
-
 
 
 %%%%%%
@@ -98,11 +92,25 @@ Hedge Mage - Farm Hand req
 
 --- Wizard - Hedge Mage req
 
------- Shaman - hunter and hedge mage?
+------ Shaman (Druid?) - hunter and hedge mage?
 - naturalist wizard
 
 - Necromancer or Summoner - regrow plants from the dead
 
+%%%%%%
+
+Fighter - Farm Hand req
+
+--- Barbarian - Fighter req
+- shouts to make plants grow/produce more, rage at them plants!
+
+--- Monk - Fighter req
+- chi powers to grow plants faster?
+
+----- Geomancer - Fighter & Hedge Mage req
+- crow crystals!
+
+%%%%%%
 
 ===================
 
