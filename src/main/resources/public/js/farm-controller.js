@@ -2,6 +2,8 @@
 wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope, $location, $uibModal, $log) {
     $scope.farm;
 
+//    $scope.currTime;
+
     // get the character from the provided id
     ($scope.getFarm = function() {
         APIService.getFarm(function(response) {
@@ -17,6 +19,10 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
             }, []);
         });
     })();
+
+//    $scope.getPlantDateFormatted = function(plantDate) {
+//        return plantDate + 1000;
+//    }
 
     $scope.plant = function(plot) {
         var plantCropRequest = FarmService.getPlantCropRequest('GRASS');

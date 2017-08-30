@@ -1,5 +1,5 @@
 	// create the module and name it scotchApp
-	var wzrdfrmApp = angular.module('wzrdfrmApp', ['ngRoute', 'ui.bootstrap', 'checklist-model', 'ngMaterial']);
+	var wzrdfrmApp = angular.module('wzrdfrmApp', ['ngRoute', 'ui.bootstrap', 'checklist-model', 'ngMaterial', 'timer']);
 
 	// configure our routes
 	wzrdfrmApp.config(function($routeProvider) {

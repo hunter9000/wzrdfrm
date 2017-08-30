@@ -52,6 +52,10 @@ farm has ultimate abilities and unlocked classes
 when unlocking class, add to farm's unlocked classes
 when using an ability, add to farm's cooldown list
 
+Crafting recipes to combine seeds/orbs/etc to make upgrades/other seeds?
+unlock this ability with a class (alchemist?)
+
+
 -- classes (5 levels per? keep it simple)
 
 Farm Hand - starter
@@ -193,5 +197,29 @@ Villager
 enchanter
 conjurer
 
+-------------
+TODO 
+-------------
+* change seeds to db tables instead of enum
+--* add progress bars for planted seeds
+* add progressive images for plant growth
+* add grow times for seeds
+* add default resource lists for seeds
+* add extra resources that can drop
+* add better ui to show harvested resources
 
+* define ability tables
+* define abilities for a few classes
+* show ui for abilities
+* drag and drop for using abilities on plots
+* click to use abilities that don't target plots
 
+* create fertilizers
+* define inventory of seeds, orbs, fertilizers
+* create ui to show inventory
+* drag and drop to plant seeds, add fertilizer, etc
+
+* add images for classes
+* add images for plants
+
+* better ui to show the current class and level progress, on farm and change screen

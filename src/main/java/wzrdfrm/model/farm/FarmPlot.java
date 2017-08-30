@@ -1,6 +1,7 @@
 package wzrdfrm.model.farm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +26,7 @@ public class FarmPlot {
     @Column(name = "col", nullable = false, updatable = false)
     private Integer col;
 
+    // serializes in json as epoch time in milliseconds
     @Temporal(value = TemporalType.TIMESTAMP)
     @Column(name = "plant_date")
     private Date plantDate = null;
@@ -77,6 +79,15 @@ public class FarmPlot {
     }
     public void setPlantDate(Date plantDate) {
         this.plantDate = plantDate;
+    }
+
+    @Transient
+    @JsonProperty(value = "endDate")
+    public Date getEndDate() {
+        if (getPlantDate() != null) {
+            return new Date(getPlantDate().toInstant().plusSeconds(100).toEpochMilli());
+        }
+        return null;
     }
 
     public PlantType getPlantType() {
