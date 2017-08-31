@@ -13,6 +13,7 @@ public class FarmManager {
     private static final int NUM_PLOT_COLS = 2;
 
     public static final String STARTING_SEED_PLANT_NAME = "Weeds";
+    public static final String STARTING_USABLE_ITEM_NAME = "Small Fertilizer";
 
     private Farm farm;
 
@@ -20,7 +21,7 @@ public class FarmManager {
         this.farm = farm;
     }
 
-    public static Farm createFarm(User user, Plant startingPlant) {
+    public static Farm createFarm(User user, Plant startingPlant, UsableItem startingUsableItem) {
         Farm farm = new Farm();
         farm.setOwner(user);
 
@@ -45,6 +46,15 @@ public class FarmManager {
         seed.setFarm(farm);
         seeds.add(seed);
         farm.setSeedInventory(seeds);
+
+        // create default consumable inventory
+        Set<Consumable> consumables = new HashSet<>();
+        Consumable consumable = new Consumable();
+        consumable.setFarm(farm);
+        consumable.setQuantity(2);
+        consumable.setUsableItem(startingUsableItem);
+        consumables.add(consumable);
+        farm.setConsumableInventory(consumables);
 
         return farm;
     }
@@ -78,9 +88,10 @@ public class FarmManager {
             throw new BadRequestException();
         }
 
+        // TODO
         List<Object> harvestedMaterials = new ArrayList<>();
 
-        harvestedMaterials.add(PlantType.WEEDS);
+//        harvestedMaterials.add(PlantType.WEEDS);
 
         farmPlot.setPlantDate(null);
         farmPlot.setPlant(null);

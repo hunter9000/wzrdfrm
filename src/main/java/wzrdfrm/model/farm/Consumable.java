@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "seed_inventory")
-public class Seed {
+@Table(name = "consumable_inventory")
+public class Consumable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,8 @@ public class Seed {
     private Farm farm;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "plant", nullable = false, updatable = false)
-    private Plant plant;
+    @JoinColumn(name = "usable_item", nullable = false, updatable = false)
+    private UsableItem usableItem;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -40,11 +40,11 @@ public class Seed {
         this.farm = farm;
     }
 
-    public Plant getPlant() {
-        return plant;
+    public UsableItem getUsableItem() {
+        return usableItem;
     }
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setUsableItem(UsableItem usableItem) {
+        this.usableItem = usableItem;
     }
 
     public Integer getQuantity() {

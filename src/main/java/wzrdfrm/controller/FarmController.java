@@ -6,9 +6,7 @@ import wzrdfrm.manager.CharClassManager;
 import wzrdfrm.manager.FarmManager;
 import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.classes.CharClassDefinition;
-import wzrdfrm.model.farm.Farm;
-import wzrdfrm.model.farm.FarmPlot;
-import wzrdfrm.model.farm.Plant;
+import wzrdfrm.model.farm.*;
 import wzrdfrm.model.user.User;
 import wzrdfrm.repository.*;
 import wzrdfrm.request.PlantCropRequest;
@@ -38,43 +36,44 @@ public class FarmController {
     private PlantRepository plantRepository;
 
     @Autowired
+    private UsableItemRepository usableItemRepository;
+
+    @Autowired
     private HttpServletRequest request;
 
-//    @RequestMapping(name = "/api/farm/{farmId}/", method = RequestMethod.GET)
-//    @FarmOwnerRequired
-//    public Farm getFarm() {
-//        Farm farm = AuthUtils.getFarm(request);
-//
-//        return farm;
-//    }
-
-    @RequestMapping(value = "/api/farm/", method = RequestMethod.GET)
+    @GetMapping(value = "/api/farm/")
+//    @RequestMapping(value = "/api/farm/", method = RequestMethod.GET)
     public Farm getFarmOwnedByUser() {
         User user = AuthUtils.getLoggedInUser(request);
         return farmRepository.findAllByOwner(user);
     }
 
-    @RequestMapping(value = "/api/farm/", method = RequestMethod.DELETE)
-//    @FarmOwnerRequired
+    @DeleteMapping(value = "/api/farm/")
+//    @RequestMapping(value = "/api/farm/", method = RequestMethod.DELETE)
     public void deleteFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
         Farm farm = farmRepository.findAllByOwner(user);
 
         farm.setCurrCharClass(null);
+        for (Seed seed : farm.getSeedInventory()) {
+            seed.setPlant(null);
+        }
 
         charClassRepository.deleteByFarm(farm);
 
         farmRepository.delete(farm);
     }
 
-    @RequestMapping(value = "/api/farm/", method = RequestMethod.POST)
+    @PostMapping(value = "/api/farm/")
+//    @RequestMapping(value = "/api/farm/", method = RequestMethod.POST)
     public Long createFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
         Plant startingPlant = plantRepository.findByName(FarmManager.STARTING_SEED_PLANT_NAME);
+        UsableItem usableItem = usableItemRepository.findByName(FarmManager.STARTING_USABLE_ITEM_NAME);
 
-        Farm farm = FarmManager.createFarm(user, startingPlant);
+        Farm farm = FarmManager.createFarm(user, startingPlant, usableItem);
 
         farmRepository.save(farm);
 
@@ -87,7 +86,8 @@ public class FarmController {
         return farm.getId();
     }
 
-    @RequestMapping(value = "/api/farm/plot/{plotId}/plant/", method = RequestMethod.PUT)
+    @PutMapping(value = "/api/farm/plot/{plotId}/plant/")
+//    @RequestMapping(value = "/api/farm/plot/{plotId}/plant/", method = RequestMethod.PUT)
     public FarmPlot plantCrop(@RequestBody PlantCropRequest plantCropRequest, @PathVariable Long plotId) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
@@ -99,32 +99,22 @@ public class FarmController {
             throw new BadRequestException();
         }
 
-//        if (plantCropRequest.requestType == PlantCropRequest.RequestType.PLANT) {
         FarmPlot farmPlot = farmManager.plantCrop(plotId, plant);
-//        }
-//        else if (plantCropRequest.requestType == PlantCropRequest.RequestType.HARVEST) {
-//            farmPlot = farmManager.harvestCrop(plotId);
-//        }
 
         farmRepository.save(farm);
 
         return farmPlot;
     }
 
-
-    @RequestMapping(value = "/api/farm/plot/{plotId}/harvest/", method = RequestMethod.PUT)
+    @PutMapping(value = "/api/farm/plot/{plotId}/harvest/")
+//    @RequestMapping(value = "/api/farm/plot/{plotId}/harvest/", method = RequestMethod.PUT)
     public List<Object> harvestCrop(@PathVariable Long plotId) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
 
         FarmManager farmManager = new FarmManager(farm);
 
-//        if (plantCropRequest.requestType == PlantCropRequest.RequestType.PLANT) {
-//        FarmPlot farmPlot = farmManager.plantCrop(plotId, plantCropRequest.plantType);
-//        }
-//        else if (plantCropRequest.requestType == PlantCropRequest.RequestType.HARVEST) {
         List<Object> harvestedMaterials = farmManager.harvestCrop(plotId);
-//        }
 
         farmRepository.save(farm);
 

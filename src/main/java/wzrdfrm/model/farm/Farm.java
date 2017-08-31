@@ -36,6 +36,9 @@ public class Farm {
     @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Seed> seedInventory;
 
+    @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Consumable> consumableInventory;
+
     public Long getId() {
         return id;
     }
@@ -69,6 +72,13 @@ public class Farm {
     }
     public void setSeedInventory(Set<Seed> seedInventory) {
         this.seedInventory = seedInventory;
+    }
+
+    public Set<Consumable> getConsumableInventory() {
+        return consumableInventory;
+    }
+    public void setConsumableInventory(Set<Consumable> consumableInventory) {
+        this.consumableInventory = consumableInventory;
     }
 
     //    public Set<CharClass> getCharClasses() {

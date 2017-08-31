@@ -55,6 +55,26 @@ when using an ability, add to farm's cooldown list
 Crafting recipes to combine seeds/orbs/etc to make upgrades/other seeds?
 unlock this ability with a class (alchemist?)
 
+seeds have harvestable materials that have to be discovered, show the list with ? if you haven't gotten one yet
+
+seeds can drop:
+* more seeds
+* seeds from higher plants
+* fertilizers
+* crafting mats (need to define later)
+
+not predefined: (define probability for these to drop per plant?)
+* xp orbs (variable amount)
+* unlock orbs (variable amount)
+
+inventory has seeds, consumables (fertilizers, etc that can be used on plots), crafting mats(displayed in farm, only usable in crafting screen)?
+unlock orbs are generic, store a quantity
+
+consumables:
+* Small Fertilizer
+* Large Fertilizer
+* Growth Potion
+
 
 -- classes (5 levels per? keep it simple)
 
@@ -200,10 +220,10 @@ conjurer
 -------------
 TODO 
 -------------
-* change seeds to db tables instead of enum
+--* change seeds to db tables instead of enum
 --* add progress bars for planted seeds
 * add progressive images for plant growth
-* add grow times for seeds
+--* add grow times for seeds
 * add default resource lists for seeds
 * add extra resources that can drop
 * add better ui to show harvested resources
@@ -222,4 +242,5 @@ TODO
 * add images for classes
 * add images for plants
 
+* define level xp tables for classes
 * better ui to show the current class and level progress, on farm and change screen
