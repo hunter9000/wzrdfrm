@@ -7,16 +7,18 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
     // get the character from the provided id
     ($scope.getFarm = function() {
         APIService.getFarm(function(response) {
-            $scope.farm = response.data;
+            $scope.farm = response.data;        // might be null
             // map all the plots into a 2d array based on row/col of each plot
-            $scope.farm.farmPlots = $scope.farm.farmPlots.reduce(function(accumulator, currentValue, currentIndex, array) {
-                // if the accumulator doesn't have an array at this position yet, create one
-                if (!accumulator[currentValue.row]) {
-                    accumulator[currentValue.row] = [];
-                }
-                accumulator[currentValue.row][currentValue.col] = currentValue;
-                return accumulator;
-            }, []);
+            if ($scope.farm) {
+                $scope.farm.farmPlots = $scope.farm.farmPlots.reduce(function(accumulator, currentValue, currentIndex, array) {
+                    // if the accumulator doesn't have an array at this position yet, create one
+                    if (!accumulator[currentValue.row]) {
+                        accumulator[currentValue.row] = [];
+                    }
+                    accumulator[currentValue.row][currentValue.col] = currentValue;
+                    return accumulator;
+                }, []);
+            }
         });
     })();
 

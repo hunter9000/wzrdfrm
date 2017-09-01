@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@RequestMapping(value = "/api")
 public class FarmController {
 
     @Autowired
@@ -41,32 +42,26 @@ public class FarmController {
     @Autowired
     private HttpServletRequest request;
 
-    @GetMapping(value = "/api/farm/")
-//    @RequestMapping(value = "/api/farm/", method = RequestMethod.GET)
+    @GetMapping(value = "/farm/")
     public Farm getFarmOwnedByUser() {
         User user = AuthUtils.getLoggedInUser(request);
         return farmRepository.findAllByOwner(user);
     }
 
-    @DeleteMapping(value = "/api/farm/")
-//    @RequestMapping(value = "/api/farm/", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/farm/")
     public void deleteFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
         Farm farm = farmRepository.findAllByOwner(user);
 
         farm.setCurrCharClass(null);
-        for (Seed seed : farm.getSeedInventory()) {
-            seed.setPlant(null);
-        }
 
         charClassRepository.deleteByFarm(farm);
 
         farmRepository.delete(farm);
     }
 
-    @PostMapping(value = "/api/farm/")
-//    @RequestMapping(value = "/api/farm/", method = RequestMethod.POST)
+    @PostMapping(value = "/farm/")
     public Long createFarm() {
         User user = AuthUtils.getLoggedInUser(request);
 
@@ -86,8 +81,7 @@ public class FarmController {
         return farm.getId();
     }
 
-    @PutMapping(value = "/api/farm/plot/{plotId}/plant/")
-//    @RequestMapping(value = "/api/farm/plot/{plotId}/plant/", method = RequestMethod.PUT)
+    @PutMapping(value = "/farm/plot/{plotId}/plant/")
     public FarmPlot plantCrop(@RequestBody PlantCropRequest plantCropRequest, @PathVariable Long plotId) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
@@ -106,8 +100,7 @@ public class FarmController {
         return farmPlot;
     }
 
-    @PutMapping(value = "/api/farm/plot/{plotId}/harvest/")
-//    @RequestMapping(value = "/api/farm/plot/{plotId}/harvest/", method = RequestMethod.PUT)
+    @PutMapping(value = "/farm/plot/{plotId}/harvest/")
     public List<Object> harvestCrop(@PathVariable Long plotId) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);

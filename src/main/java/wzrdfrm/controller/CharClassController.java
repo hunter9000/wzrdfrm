@@ -88,7 +88,7 @@ public class CharClassController {
             throw new BadRequestException();
         }
 
-        // can this class be unlocked?
+        // TODO can this class be unlocked?
 
         // unlock the class
         charClass.setUnlocked(true);
