@@ -78,7 +78,7 @@ public class FarmManager {
         return farmPlot;
     }
 
-    public List<Object> harvestCrop(Long plotId) {
+    public List<HarvestReward> harvestCrop(Long plotId) {
         FarmPlot farmPlot = getFarmPlotById(plotId);
         if (farmPlot == null) {
             throw new BadRequestException();
@@ -89,9 +89,26 @@ public class FarmManager {
         }
 
         // TODO
-        List<Object> harvestedMaterials = new ArrayList<>();
+        List<HarvestReward> harvestedMaterials = new ArrayList<>();
 
-//        harvestedMaterials.add(PlantType.WEEDS);
+        // get seed rewards
+        // TODO make 1 seed of the current plant type for now, make this more random later
+        Plant currentPlant = farmPlot.getPlant();
+        Seed seed = new Seed();
+        seed.setPlant(currentPlant);
+        seed.setFarm(farm);
+        seed.setQuantity(1);
+        this.addSeedToInventory(seed);
+        harvestedMaterials.add(seed);
+
+        // get consumable rewards
+        Consumable consumable = new Consumable();
+        consumable.setFarm(farm);
+        // TODO how to get the usable items to choose from?
+//        consumable.setUsableItem();
+        consumable.setQuantity(1);
+        this.addConsumableToInventory(consumable);
+        harvestedMaterials.add(consumable);
 
         farmPlot.setPlantDate(null);
         farmPlot.setPlant(null);
@@ -101,5 +118,27 @@ public class FarmManager {
 
     private FarmPlot getFarmPlotById(Long plotId) {
         return IterableUtils.find(farm.getFarmPlots(), (FarmPlot plot) -> plot.getId().equals(plotId));
+    }
+
+    /** Takes the given seed and either combines it's quantity to an existing seed, or adds it to the list */
+    private void addSeedToInventory(Seed newSeed) {
+        Seed matchingSeed = IterableUtils.find(farm.getSeedInventory(), (Seed seed) -> newSeed.getPlant().getId().equals(newSeed.getPlant().getId()) );
+        if (matchingSeed == null) {
+            farm.getSeedInventory().add(newSeed);
+        }
+        else {
+            matchingSeed.setQuantity(matchingSeed.getQuantity() + newSeed.getQuantity());
+        }
+    }
+
+    /** Takes the given consumable and either combines it's quantity to an existing consumable, or adds it to the list */
+    private void addConsumableToInventory(Consumable newConsumable) {
+        Consumable matchingConsumable = IterableUtils.find(farm.getConsumableInventory(), (Consumable consumable) -> newConsumable.getUsableItem().getId().equals(newConsumable.getUsableItem().getId()) );
+        if (matchingConsumable == null) {
+            farm.getConsumableInventory().add(newConsumable);
+        }
+        else {
+            matchingConsumable.setQuantity(matchingConsumable.getQuantity() + newConsumable.getQuantity());
+        }
     }
 }

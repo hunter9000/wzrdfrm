@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "seed_inventory")
-public class Seed {
+public class Seed implements HarvestReward {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,10 +47,17 @@ public class Seed {
         this.plant = plant;
     }
 
+    @Override
     public Integer getQuantity() {
         return quantity;
     }
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    /* HarvestReward override */
+    @Override
+    public String getName() {
+        return plant.getName();
     }
 }
