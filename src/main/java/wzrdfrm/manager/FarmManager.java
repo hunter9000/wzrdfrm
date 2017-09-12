@@ -110,6 +110,12 @@ public class FarmManager {
         this.addConsumableToInventory(consumable);
         harvestedMaterials.add(consumable);
 
+        // xp orbs
+        // TODO randomize this based on range and crop harvested
+        Integer numXPOrbs = 2;
+        ClassLevelManager classLevelManager = new ClassLevelManager(farm);
+        classLevelManager.addXPToCurrentClass(numXPOrbs);
+
         farmPlot.setPlantDate(null);
         farmPlot.setPlant(null);
 

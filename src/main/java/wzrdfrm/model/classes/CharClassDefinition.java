@@ -3,6 +3,7 @@ package wzrdfrm.model.classes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Map;
 import java.util.Set;
 
 /** The static definition of each class */
@@ -21,8 +22,13 @@ public class CharClassDefinition {
     @Column(name = "orbs_to_unlock", nullable = false, updatable = false)
     private Integer orbsToUnlock;
 
+    // TODO remove this, use the class level instead to define what the class gets?
     @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
     private Set<ClassAbility> classAbilities;
+
+    @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
+    @MapKey(name = "level")
+    private Map<Integer, ClassLevel> classLevels;
 
     @ManyToMany()
     @JoinTable(name = "char_class_prereq",
@@ -57,6 +63,13 @@ public class CharClassDefinition {
     }
     public void setClassAbilities(Set<ClassAbility> classAbilities) {
         this.classAbilities = classAbilities;
+    }
+
+    public Map<Integer, ClassLevel> getClassLevels() {
+        return classLevels;
+    }
+    public void setClassLevels(Map<Integer, ClassLevel> classLevels) {
+        this.classLevels = classLevels;
     }
 
     public Set<CharClassDefinition> getPrereqClasses() {

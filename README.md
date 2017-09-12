@@ -244,3 +244,9 @@ TODO
 
 * define level xp tables for classes
 * better ui to show the current class and level progress, on farm and change screen
+
+
+xp level:
+tier 1: 100 xp for max (farm hand)
+tier 2: 150 xp for max (
+
