@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import wzrdfrm.manager.CharClassManager;
+import wzrdfrm.manager.ClassLevelManager;
 import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.farm.Farm;
 import wzrdfrm.model.user.User;
@@ -40,6 +41,9 @@ public class CharClassController {
         Farm farm = farmRepository.findAllByOwner(user);
 
         Iterable<CharClass> charClasses = charClassRepository.findAllByFarm(farm);
+
+        ClassLevelManager classLevelManager = new ClassLevelManager(farm);
+        classLevelManager.setAllClassXpLevels(charClasses);
 
         CharClassInfoResponse charClassInfoResponse = new CharClassInfoResponse(farm.getCurrCharClass(), charClasses);
 

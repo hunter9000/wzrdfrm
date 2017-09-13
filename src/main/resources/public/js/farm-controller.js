@@ -61,7 +61,7 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
             animation: false,
             templateUrl: 'pages/templates/char-class-change-template.html',
             controller: 'CharClassChangeController',
-            size: 'lg',
+            size: 'md',
             resolve: { }
         });
 

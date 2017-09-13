@@ -12,6 +12,11 @@ wzrdfrmApp.controller('CharClassChangeController', function (APIService, FarmSer
         });
     })();
 
+    // charClass.unlocked && currCharClass.id == charClass.id
+    $scope.isCurrentClass = function(charClass) {
+        return charClass.unlocked && $scope.currCharClass.id == charClass.id;
+    }
+
     $scope.switchTo = function(charClass) {
         var switchRequest = FarmService.getCharClassRequest(charClass.id);
 

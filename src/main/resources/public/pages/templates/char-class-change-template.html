@@ -4,20 +4,22 @@
 </div>
 
 <div class="modal-body">
-    <div ng-repeat="charClass in charClasses">
-        <span ng-show="charClass.unlocked && currCharClass.id == charClass.id">Current!</span>
-        Name: {{charClass.charClassDefinition.name}}
-        orbsToUnlock: {{charClass.charClassDefinition.orbsToUnlock}}
-        classAbilities: {{charClass.charClassDefinition.classAbilities}}
-        currentXP: {{charClass.currentXP}}
-        currentLevel: {{charClass.currentLevel}}
-        Unlocked: {{charClass.unlocked}}
-        <button ng-show="charClass.unlocked && currCharClass.id != charClass.id" ng-click="switchTo(charClass)">Switch to</button>
-        <button ng-show="!charClass.unlocked" ng-click="unlock(charClass)">Unlock</button>
+    <div ng-repeat="charClass in charClasses" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-class="{'class-select-current-class': isCurrentClass(charClass) }">
+        <!--<span ng-show="isCurrentClass(charClass)">Current!</span>-->
+        <!--Name: {{charClass.charClassDefinition.name}}-->
+        <!--orbsToUnlock: {{charClass.charClassDefinition.orbsToUnlock}}-->
+        <!--classAbilities: {{charClass.charClassDefinition.classAbilities}}-->
+        <!--currentXP: {{charClass.currentXP}}-->
+        <!--currentLevel: {{charClass.currentLevel}}-->
+        <!--Unlocked: {{charClass.unlocked}}-->
+
+        <class-level char-class="charClass" />
+
+        <button class="btn btn-secondary" ng-show="charClass.unlocked && currCharClass.id != charClass.id" ng-click="switchTo(charClass)">Switch to</button>
+        <button class="btn btn-secondary" ng-show="!charClass.unlocked" ng-click="unlock(charClass)">Unlock for {{charClass.charClassDefinition.orbsToUnlock}}</button>
+
     </div>
 </div>
-
-{{currCharClass}}
 
 <div class="modal-footer">
     <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>

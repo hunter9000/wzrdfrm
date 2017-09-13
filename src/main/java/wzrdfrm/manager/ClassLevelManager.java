@@ -22,13 +22,35 @@ public class ClassLevelManager {
         }
 
         Integer newXP = charClass.getCurrentXP() + xp;
-        ClassLevel currentClassLevel = charClass.getCharClassDefinition().getClassLevels().get(charClass.getCurrentLevel());
-        if (newXP >= currentClassLevel.getXpRequired()) {       // level up!
-            newXP -= currentClassLevel.getXpRequired();     // remove this level's xp req from the new value
+        ClassLevel nextClassLevel = getNextClassLevel(charClass);
+        if (newXP >= nextClassLevel.getXpRequired()) {       // level up!
+            newXP -= nextClassLevel.getXpRequired();     // remove this level's xp req from the new value
             charClass.setCurrentLevel(charClass.getCurrentLevel() + 1);
         }
 
         charClass.setCurrentXP(newXP);
     }
 
+    /** Calculates and sets the xp needed to level for the current class only. */
+    public void setCurrentClassXpLevels() {
+        setXpNeededToLevel(farm.getCurrCharClass());
+    }
+
+    /** Calculates and sets the xp needed to level for all the classes. */
+    public void setAllClassXpLevels(Iterable<CharClass> charClasses) {
+        for (CharClass charClass : charClasses) {
+            setXpNeededToLevel(charClass);
+        }
+    }
+
+    private void setXpNeededToLevel(CharClass charClass) {
+        if (charClass.getCurrentLevel() != MAX_LEVEL) {
+            Integer xpNeeded = getNextClassLevel(charClass).getXpRequired();
+            charClass.setXpNeededToLevel(xpNeeded);
+        }
+    }
+
+    private ClassLevel getNextClassLevel(CharClass charClass) {
+        return charClass.getCharClassDefinition().getClassLevels().get(charClass.getCurrentLevel() + 1);
+    }
 }

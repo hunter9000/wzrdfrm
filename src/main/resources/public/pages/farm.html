@@ -53,11 +53,13 @@
             </div>
             <div class="col-md-3">
 
-                <div>
-                    <div>Class: {{farm.currCharClass.charClassDefinition.name}}</div>
-                    <div>Level: {{farm.currCharClass.currentLevel}}</div>
-                    <div>XP: {{farm.currCharClass.currentXP}}</div>
-                </div>
+                <!--<div>-->
+                    <!--<div>Class: {{farm.currCharClass.charClassDefinition.name}}</div>-->
+                    <!--<div>Level: {{farm.currCharClass.currentLevel}}</div>-->
+                    <!--<div>XP: {{farm.currCharClass.currentXP}}</div>-->
+                <!--</div>-->
+
+                <class-level char-class="farm.currCharClass" />
 
                 <button class="btn" ng-click="changeCharClass()">Change class</button>
 

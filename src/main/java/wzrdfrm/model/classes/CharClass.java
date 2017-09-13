@@ -1,6 +1,7 @@
 package wzrdfrm.model.classes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import wzrdfrm.model.farm.Farm;
 
 import javax.persistence.*;
@@ -32,6 +33,14 @@ public class CharClass {
 
     @Column(name = "unlocked", nullable = false)
     private Boolean unlocked = false;
+
+    @Transient
+    @JsonProperty
+    private Integer xpNeededToLevel;
+
+//    public Integer xpNeededToLevel() {
+//
+//    }
 
     public Long getId() {
         return id;
@@ -73,5 +82,12 @@ public class CharClass {
     }
     public void setUnlocked(Boolean unlocked) {
         this.unlocked = unlocked;
+    }
+
+    public Integer getXpNeededToLevel() {
+        return xpNeededToLevel;
+    }
+    public void setXpNeededToLevel(Integer xpNeededToLevel) {
+        this.xpNeededToLevel = xpNeededToLevel;
     }
 }

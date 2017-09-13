@@ -67,3 +67,28 @@ div.scroll-item {
     margin: 5px;
     padding: 5px;
 }
+
+
+.class-level-wrapper {
+    display: inline-block;
+    padding: 5px;
+}
+.class-name {
+    display: inline-block;
+    width: 110px;
+}
+.class-level {
+    width: 20px;
+    display: inline-block;
+}
+.class-xp-bar {
+    width: 140px;
+    display: inline-block;
+}
+.class-xp-bar .progress {
+    margin-bottom: 0px;
+}
+
+.class-select-current-class {
+    border: 1px solid red;
+}

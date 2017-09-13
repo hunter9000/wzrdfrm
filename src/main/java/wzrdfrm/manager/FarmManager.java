@@ -78,7 +78,7 @@ public class FarmManager {
         return farmPlot;
     }
 
-    public List<HarvestReward> harvestCrop(Long plotId) {
+    public List<HarvestReward> harvestCrop(Long plotId, UsableItem usableItem) {
         FarmPlot farmPlot = getFarmPlotById(plotId);
         if (farmPlot == null) {
             throw new BadRequestException();
@@ -105,7 +105,7 @@ public class FarmManager {
         Consumable consumable = new Consumable();
         consumable.setFarm(farm);
         // TODO how to get the usable items to choose from?
-//        consumable.setUsableItem();
+        consumable.setUsableItem(usableItem);
         consumable.setQuantity(1);
         this.addConsumableToInventory(consumable);
         harvestedMaterials.add(consumable);
@@ -139,7 +139,7 @@ public class FarmManager {
 
     /** Takes the given consumable and either combines it's quantity to an existing consumable, or adds it to the list */
     private void addConsumableToInventory(Consumable newConsumable) {
-        Consumable matchingConsumable = IterableUtils.find(farm.getConsumableInventory(), (Consumable consumable) -> newConsumable.getUsableItem().getId().equals(newConsumable.getUsableItem().getId()) );
+        Consumable matchingConsumable = IterableUtils.find(farm.getConsumableInventory(), (Consumable consumable) -> consumable.getUsableItem().getId().equals(newConsumable.getUsableItem().getId()) );
         if (matchingConsumable == null) {
             farm.getConsumableInventory().add(newConsumable);
         }

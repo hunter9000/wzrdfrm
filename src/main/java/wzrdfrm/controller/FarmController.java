@@ -3,6 +3,7 @@ package wzrdfrm.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wzrdfrm.manager.CharClassManager;
+import wzrdfrm.manager.ClassLevelManager;
 import wzrdfrm.manager.FarmManager;
 import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.classes.CharClassDefinition;
@@ -45,7 +46,15 @@ public class FarmController {
     @GetMapping(value = "/farm/")
     public Farm getFarmOwnedByUser() {
         User user = AuthUtils.getLoggedInUser(request);
-        return farmRepository.findAllByOwner(user);
+
+        Farm farm = farmRepository.findAllByOwner(user);
+
+        if (farm != null) {
+            ClassLevelManager classLevelManager = new ClassLevelManager(farm);
+            classLevelManager.setCurrentClassXpLevels();
+        }
+
+        return farm;
     }
 
     @DeleteMapping(value = "/farm/")
@@ -101,13 +110,14 @@ public class FarmController {
     }
 
     @PutMapping(value = "/farm/plot/{plotId}/harvest/")
-    public List<Object> harvestCrop(@PathVariable Long plotId) {
+    public List<HarvestReward> harvestCrop(@PathVariable Long plotId) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
 
         FarmManager farmManager = new FarmManager(farm);
 
-        List<Object> harvestedMaterials = farmManager.harvestCrop(plotId);
+        UsableItem usableItem = usableItemRepository.findByName(FarmManager.STARTING_USABLE_ITEM_NAME);
+        List<HarvestReward> harvestedMaterials = farmManager.harvestCrop(plotId, usableItem);
 
         farmRepository.save(farm);
 

@@ -28,6 +28,7 @@ public class CharClassDefinition {
 
     @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
     @MapKey(name = "level")
+    @JsonIgnore
     private Map<Integer, ClassLevel> classLevels;
 
     @ManyToMany()
