@@ -4,14 +4,10 @@
 </div>
 
 <div class="modal-body">
-    <div ng-repeat="charClass in charClasses" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-class="{'class-select-current-class': isCurrentClass(charClass) }">
-        <!--<span ng-show="isCurrentClass(charClass)">Current!</span>-->
-        <!--Name: {{charClass.charClassDefinition.name}}-->
-        <!--orbsToUnlock: {{charClass.charClassDefinition.orbsToUnlock}}-->
-        <!--classAbilities: {{charClass.charClassDefinition.classAbilities}}-->
-        <!--currentXP: {{charClass.currentXP}}-->
-        <!--currentLevel: {{charClass.currentLevel}}-->
-        <!--Unlocked: {{charClass.unlocked}}-->
+    <div ng-repeat="charClass in charClasses"
+         ng-mouseenter="hover = true"
+         ng-mouseleave="hover = false"
+         ng-class="{'class-select-current-class': isCurrentClass(charClass), 'class-select-hover-class': hover && !isCurrentClass(charClass) }">
 
         <class-level char-class="charClass" />
 

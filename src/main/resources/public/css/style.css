@@ -92,3 +92,7 @@ div.scroll-item {
 .class-select-current-class {
     border: 1px solid red;
 }
+
+.class-select-hover-class {
+    background-color: lightgreen;
+}
