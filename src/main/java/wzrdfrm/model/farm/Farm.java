@@ -6,6 +6,7 @@ import wzrdfrm.model.user.User;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.SortedSet;
 
 /** The toplevel game object. Only one per user at a time, contains all game state info */
 @Entity

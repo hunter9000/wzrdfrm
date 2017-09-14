@@ -139,7 +139,7 @@ public class FarmManager {
 
     /** Takes the given consumable and either combines it's quantity to an existing consumable, or adds it to the list */
     private void addConsumableToInventory(Consumable newConsumable) {
-        Consumable matchingConsumable = IterableUtils.find(farm.getConsumableInventory(), (Consumable consumable) -> consumable.getUsableItem().getId().equals(newConsumable.getUsableItem().getId()) );
+        Consumable matchingConsumable = IterableUtils.find(farm.getConsumableInventory(), (Consumable consumable) -> newConsumable.getUsableItem().getId().equals(newConsumable.getUsableItem().getId()) );
         if (matchingConsumable == null) {
             farm.getConsumableInventory().add(newConsumable);
         }

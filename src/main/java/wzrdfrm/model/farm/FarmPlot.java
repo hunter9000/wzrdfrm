@@ -35,7 +35,7 @@ public class FarmPlot {
 //    @Enumerated(EnumType.STRING)
 //    private PlantType plantType;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "plant")
     private Plant plant;
 
