@@ -235,18 +235,19 @@ TODO
 * click to use abilities that don't target plots
 
 * create fertilizers
-* define inventory of seeds, orbs, fertilizers
-* create ui to show inventory
+--* define inventory of seeds, orbs, fertilizers
+--* create ui to show inventory
 * drag and drop to plant seeds, add fertilizer, etc
 
 * add images for classes
 * add images for plants
 
-* define level xp tables for classes
-* better ui to show the current class and level progress, on farm and change screen
+--* define level xp tables for classes
+--* better ui to show the current class and level progress, on farm and change screen
 
 
 xp level:
 tier 1: 100 xp for max (farm hand)
-tier 2: 150 xp for max (
+tier 2: 150 xp for max (classes that require farm hand)
+tier 3: 200 xp for max (hybrid classes that depend on tier 2)
 
