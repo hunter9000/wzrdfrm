@@ -1,4 +1,4 @@
-farming wizard
+WZRD FRM!
 
 farm plots, seeds to plant, let them grow, harvest
 harvest to get seeds, other mats, xp orbs, unlock orbs
@@ -251,3 +251,5 @@ tier 1: 100 xp for max (farm hand)
 tier 2: 150 xp for max (classes that require farm hand)
 tier 3: 200 xp for max (hybrid classes that depend on tier 2)
 
+Dependencies:
+http://bootstrap-notify.remabledesigns.com/#documentation

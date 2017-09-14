@@ -1,5 +1,5 @@
 
-wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope, $location, $uibModal, $log) {
+wzrdfrmApp.controller('farmController', function(APIService, FarmService, NotificationService, $scope, $location, $uibModal, $log) {
     $scope.farm;
 
 //    $scope.currTime;
@@ -18,6 +18,8 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, $scope
                     accumulator[currentValue.row][currentValue.col] = currentValue;
                     return accumulator;
                 }, []);
+				
+				NotificationService.createNotification();
             }
         });
     })();
