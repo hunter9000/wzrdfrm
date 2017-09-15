@@ -75,16 +75,30 @@ consumables:
 * Large Fertilizer
 * Growth Potion
 
+ability ideas:
+unlock plots (start with 1)
+unlock new plant seed types
+faster grow times
+unlock new consumables
+unlock crafting recipes
+chance to upgrade seed when harvesting
+chance to harvest extra resources
+active ability to reduce grow time, get more resources, give plot a bonus?
+
 
 -- classes (5 levels per? keep it simple)
 
 Farm Hand - starter
 - 1 harvest seeds? start without the ability to get seeds from harvested plants. make sure to start with enough to xp up to here
-- 2 faster grow times
-- 3
+- 2
+- 3 unlock second plot
 - 4
-- 5 [ult] fertilizer more effective
-
+- 5 faster grow times
+- 6
+- 7
+- 8 chance to get upgraded seeds
+- 9
+- 10 [ult] fertilizer more effective
 %%%%%%
 
 Thief - Farm Hand req
