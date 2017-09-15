@@ -226,7 +226,7 @@ TODO
 --* add grow times for seeds
 * add default resource lists for seeds
 * add extra resources that can drop
-* add better ui to show harvested resources
+--* add better ui to show harvested resources
 
 * define ability tables
 * define abilities for a few classes

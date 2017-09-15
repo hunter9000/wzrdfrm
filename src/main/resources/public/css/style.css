@@ -96,3 +96,16 @@ div.scroll-item {
 .class-select-hover-class {
     background-color: lightgreen;
 }
+
+
+.notification-title {
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+.notification-message {
+
+}
+.harvest-reward-wrapper {
+
+}

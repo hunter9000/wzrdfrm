@@ -19,7 +19,7 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, Notifi
                     return accumulator;
                 }, []);
 				
-				NotificationService.createNotification();
+
             }
         });
     })();
@@ -40,6 +40,7 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, Notifi
     $scope.harvest = function(plot) {
         APIService.harvestCrop(plot.id, function(response) {
             $scope.harvestedMaterials = response.data;
+            NotificationService.createHarvestRewardNotification($scope.harvestedMaterials);
             $scope.getFarm();
         });
     }
