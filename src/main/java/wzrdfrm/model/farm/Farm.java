@@ -1,12 +1,13 @@
 package wzrdfrm.model.farm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import wzrdfrm.model.classes.AbilityType;
 import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.user.User;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 
 /** The toplevel game object. Only one per user at a time, contains all game state info */
 @Entity
@@ -39,6 +40,14 @@ public class Farm {
 
     @OneToMany(mappedBy = "farm", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Consumable> consumableInventory;
+
+    @Column(name = "num_unlock_orbs", nullable = false)
+    private Integer numUnlockOrbs = 0;
+
+    /* All the abilities that this farm has access to, based on current class, and permanent abilities from all classes */
+    @Transient
+    private List<AbilityType> abilities;
+
 
     public Long getId() {
         return id;
@@ -80,6 +89,20 @@ public class Farm {
     }
     public void setConsumableInventory(Set<Consumable> consumableInventory) {
         this.consumableInventory = consumableInventory;
+    }
+
+    public List<AbilityType> getAbilities() {
+        return abilities;
+    }
+    public void setAbilities(List<AbilityType> abilities) {
+        this.abilities = abilities;
+    }
+
+    public Integer getNumUnlockOrbs() {
+        return numUnlockOrbs;
+    }
+    public void setNumUnlockOrbs(Integer numUnlockOrbs) {
+        this.numUnlockOrbs = numUnlockOrbs;
     }
 
     //    public Set<CharClass> getCharClasses() {

@@ -16,7 +16,7 @@ public class Plant {
     private String name;
 
     @Column(name = "grow_time_milliseconds", nullable = false, updatable = false)
-    private Long growTimeSeconds;
+    private Long growTimeMilliSeconds;
 
 
     public Long getId() {
@@ -33,10 +33,10 @@ public class Plant {
         this.name = name;
     }
 
-    public Long getGrowTimeSeconds() {
-        return growTimeSeconds;
+    public Long getGrowTimeMilliSeconds() {
+        return growTimeMilliSeconds;
     }
-    public void setGrowTimeSeconds(Long growTimeSeconds) {
-        this.growTimeSeconds = growTimeSeconds;
+    public void setGrowTimeMilliSeconds(Long growTimeMilliSeconds) {
+        this.growTimeMilliSeconds = growTimeMilliSeconds;
     }
 }

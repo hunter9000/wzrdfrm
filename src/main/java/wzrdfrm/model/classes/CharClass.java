@@ -90,4 +90,23 @@ public class CharClass {
     public void setXpNeededToLevel(Integer xpNeededToLevel) {
         this.xpNeededToLevel = xpNeededToLevel;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        CharClass other = (CharClass)obj;
+//        if (this.id != null && other.id != null) {
+//            return this.id.equals(other.id);
+//        }
+//        else {
+            return this.charClassDefinition.equals(other.charClassDefinition);
+//        }
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.id == null) {
+            return 0;
+        }
+        return this.id.hashCode();
+    }
 }

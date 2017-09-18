@@ -28,8 +28,11 @@ public class ClassLevel {
 	private Integer xpRequired;
 
 	// reference to ability granted at this level
-//	@Column(name = "class_ability", nullable = false, updatable = false)
+//	@Column(name = "class_ability", updatable = false)
 //    private ClassAbility classAbility;
+    @Column(name = "ability_type", updatable = false)
+    @Enumerated(EnumType.STRING)
+    private AbilityType abilityType;
 
     public Long getId() {
         return id;
@@ -59,7 +62,14 @@ public class ClassLevel {
         this.xpRequired = xpRequired;
     }
 
-//    public ClassAbility getClassAbility() {
+    public AbilityType getAbilityType() {
+        return abilityType;
+    }
+    public void setAbilityType(AbilityType abilityType) {
+        this.abilityType = abilityType;
+    }
+
+    //    public ClassAbility getClassAbility() {
 //        return classAbility;
 //    }
 //    public void setClassAbility(ClassAbility classAbility) {
