@@ -1,18 +1,44 @@
 
-wzrdfrmApp.factory('FarmService', function() {
+wzrdfrmApp.factory('FarmService', function(APIService, NotificationService) {
+
+    var getPlantCropRequest = function(plant) {
+        return {
+            'plantId': plant.id
+        };
+    };
+
+    var getCharClassRequest = function(charClassId) {
+        return {
+            'charClassId': charClassId
+        }
+    };
+
+    var broadcastFarmModifiedCallback = function() {
+//        return function(response) {
+        $rootScope.$broadcast('farm.modified', {});
+//        }
+    };
 
     return {
-        getPlantCropRequest: function(plant) {
-            return {
-                'plantId': plant.id
-            };
+
+        plantCrop: function(plot, plant) {
+            var plantCropRequest = getPlantCropRequest(plant);
+
+            APIService.plantCrop(plot.id, plantCropRequest, function(response) {
+//                var farmPlot = response.data;
+//                $scope.farm.farmPlots[farmPlot.row][farmPlot.col] = farmPlot;
+                broadcastFarmModifiedCallback();
+            });
         },
 
-        getCharClassRequest: function(charClassId) {
-            return {
-                'charClassId': charClassId
-            }
-        }
+        harvestCrop: function(plot) {
+            APIService.harvestCrop(plot.id, function(response) {
+//                $scope.harvestedMaterials = response.data;
+                NotificationService.createHarvestRewardNotification(response.data);
+//                $scope.getFarm();
+                broadcastFarmModifiedCallback();
+            });
+        },
     };
 
 });

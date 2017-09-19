@@ -9,41 +9,44 @@
             <div class="col-md-6">
                 <div class="plot-row-wrapper" ng-repeat="plotRow in farm.farmPlots">
                     <div class="plot-wrapper" ng-repeat="plot in plotRow">
-                        <div ng-show="plot.unlocked">
 
-                            <!-- Plant name and timer -->
-                            <div ng-show="plot.plant">
-                                <span>{{plot.plant.name}}</span>
-                                <!--<span>Date: {{plot.plantDate | date:'MM-dd-yyyy HH:mm:ss'}}</span>-->
+                        <farm-plot plot="plot" seeds="farm.seedInventory" consumables="farm.consumableInventory"></farm-plot>
 
-                                <!-- progress bar -->
-                                <!-- timer's progressBar variable starts at 100 and counts down to 0 for some reason -->
-                                <timer start-time="plot.plantDate" end-time="plot.endDate" interval="1000">
-                                    <!--[{{progressBar}}]-->
-                                    <div class="progress active {{displayProgressActive}}" ng-show="progressBar > 0">
-                                        <div class="progress-bar bar" style="width: calc(100% - {{progressBar}}%);">
-                                        </div>
-                                    </div>
+                        <!--<div ng-show="plot.unlocked">-->
 
-                                    <button class="btn" ng-show="progressBar <= 0 || !progressBar" ng-click="harvest(plot)">Harvest</button>
-                                </timer>
-                            </div>
+                            <!--&lt;!&ndash; Plant name and timer &ndash;&gt;-->
+                            <!--<div ng-show="plot.plant">-->
+                                <!--<span>{{plot.plant.name}}</span>-->
+                                <!--&lt;!&ndash;<span>Date: {{plot.plantDate | date:'MM-dd-yyyy HH:mm:ss'}}</span>&ndash;&gt;-->
 
-                            <!-- Plant selection if nothing is planted -->
-                            <div class="dropdown" ng-hide="plot.plant">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Plant <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li ng-repeat="seed in farm.seedInventory">
-                                        <a href="#" ng-click="plant(plot, seed.plant)">
-                                            {{seed.plant.name}}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <!--&lt;!&ndash; progress bar &ndash;&gt;-->
+                                <!--&lt;!&ndash; timer's progressBar variable starts at 100 and counts down to 0 for some reason &ndash;&gt;-->
+                                <!--<timer start-time="plot.plantDate" end-time="plot.endDate" interval="1000">-->
+                                    <!--&lt;!&ndash;[{{progressBar}}]&ndash;&gt;-->
+                                    <!--<div class="progress active {{displayProgressActive}}" ng-show="progressBar > 0">-->
+                                        <!--<div class="progress-bar bar" style="width: calc(100% - {{progressBar}}%);">-->
+                                        <!--</div>-->
+                                    <!--</div>-->
 
-                        </div>
+                                    <!--<button class="btn" ng-show="progressBar <= 0 || !progressBar" ng-click="harvest(plot)">Harvest</button>-->
+                                <!--</timer>-->
+                            <!--</div>-->
+
+                            <!--&lt;!&ndash; Plant selection if nothing is planted &ndash;&gt;-->
+                            <!--<div class="dropdown" ng-hide="plot.plant">-->
+                                <!--<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">-->
+                                    <!--Plant <span class="caret"></span>-->
+                                <!--</button>-->
+                                <!--<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">-->
+                                    <!--<li ng-repeat="seed in farm.seedInventory">-->
+                                        <!--<a href="#" ng-click="plant(plot, seed.plant)">-->
+                                            <!--{{seed.plant.name}}-->
+                                        <!--</a>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
 
                     </div>
                 </div>

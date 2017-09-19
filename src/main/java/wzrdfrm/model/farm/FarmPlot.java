@@ -35,6 +35,10 @@ public class FarmPlot {
     @JoinColumn(name = "plant")
     private Plant plant;
 
+    // consumable item that was applied to the plot when planted
+//    @Column()
+//    private UsableItem usableItem;
+
     @Column(name = "unlocked", nullable = false)
     private Boolean unlocked = false;
 

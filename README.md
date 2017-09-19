@@ -74,6 +74,8 @@ consumables:
 * Small Fertilizer
 * Large Fertilizer
 * Growth Potion
+(grow faster, make more seeds, make more xp but no seeds, extra unlocks but nothing else
+
 
 ability ideas:
 unlock plots (start with 1)

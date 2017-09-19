@@ -24,26 +24,31 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, Notifi
         });
     })();
 
+    $scope.$on("farm.modified", function(e, kvp){
+        alert('getting farm now!');
+        $scope.getFarm();
+    });
+
 //    $scope.getPlantDateFormatted = function(plantDate) {
 //        return plantDate + 1000;
 //    }
 
-    $scope.plant = function(plot, plant) {
-        var plantCropRequest = FarmService.getPlantCropRequest(plant);
-
-        APIService.plantCrop(plot.id, plantCropRequest, function(response) {
-            var farmPlot = response.data;
-            $scope.farm.farmPlots[farmPlot.row][farmPlot.col] = farmPlot;
-        });
-    }
-
-    $scope.harvest = function(plot) {
-        APIService.harvestCrop(plot.id, function(response) {
-            $scope.harvestedMaterials = response.data;
-            NotificationService.createHarvestRewardNotification($scope.harvestedMaterials);
-            $scope.getFarm();
-        });
-    }
+//    $scope.plant = function(plot, plant) {
+//        var plantCropRequest = FarmService.getPlantCropRequest(plant);
+//
+//        APIService.plantCrop(plot.id, plantCropRequest, function(response) {
+//            var farmPlot = response.data;
+//            $scope.farm.farmPlots[farmPlot.row][farmPlot.col] = farmPlot;
+//        });
+//    }
+//
+//    $scope.harvest = function(plot) {
+//        APIService.harvestCrop(plot.id, function(response) {
+//            $scope.harvestedMaterials = response.data;
+//            NotificationService.createHarvestRewardNotification($scope.harvestedMaterials);
+//            $scope.getFarm();
+//        });
+//    }
 
     $scope.createFarm = function() {
         APIService.createFarm(function(response) {
