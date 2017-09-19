@@ -31,10 +31,6 @@ public class FarmPlot {
     @Column(name = "plant_date")
     private Date plantDate = null;
 
-//    @Column(name = "plant_type")
-//    @Enumerated(EnumType.STRING)
-//    private PlantType plantType;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "plant")
     private Plant plant;
@@ -42,6 +38,14 @@ public class FarmPlot {
     @Column(name = "unlocked", nullable = false)
     private Boolean unlocked = false;
 
+    @Transient
+    @JsonProperty(value = "endDate")
+    public Date getEndDate() {
+        if (getPlantDate() != null && getPlant() != null) {
+            return new Date(getPlantDate().toInstant().plusMillis(this.getPlant().getGrowTimeMilliSeconds()).toEpochMilli());
+        }
+        return null;
+    }
 
     public Long getId() {
         return id;
@@ -85,26 +89,11 @@ public class FarmPlot {
         this.plantDate = plantDate;
     }
 
-    @Transient
-    @JsonProperty(value = "endDate")
-    public Date getEndDate() {
-        if (getPlantDate() != null) {
-            return new Date(getPlantDate().toInstant().plusSeconds(100).toEpochMilli());
-        }
-        return null;
-    }
-
-//    public PlantType getPlantType() {
-//        return plantType;
-//    }
-//    public void setPlantType(PlantType plantType) {
-//        this.plantType = plantType;
-//    }
-
     public Plant getPlant() {
         return plant;
     }
     public void setPlant(Plant plant) {
         this.plant = plant;
     }
+
 }

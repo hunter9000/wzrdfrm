@@ -23,8 +23,8 @@ public class CharClassDefinition {
     private Integer orbsToUnlock;
 
     // TODO remove this, use the class level instead to define what the class gets?
-    @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
-    private Set<ClassAbility> classAbilities;
+//    @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
+//    private Set<ClassAbility> classAbilities;
 
     @OneToMany(mappedBy = "charClassDefinition", fetch = FetchType.EAGER)
     @MapKey(name = "level")
@@ -59,12 +59,12 @@ public class CharClassDefinition {
         this.orbsToUnlock = orbsToUnlock;
     }
 
-    public Set<ClassAbility> getClassAbilities() {
-        return classAbilities;
-    }
-    public void setClassAbilities(Set<ClassAbility> classAbilities) {
-        this.classAbilities = classAbilities;
-    }
+//    public Set<ClassAbility> getClassAbilities() {
+//        return classAbilities;
+//    }
+//    public void setClassAbilities(Set<ClassAbility> classAbilities) {
+//        this.classAbilities = classAbilities;
+//    }
 
     public Map<Integer, ClassLevel> getClassLevels() {
         return classLevels;
@@ -78,5 +78,16 @@ public class CharClassDefinition {
     }
     public void setPrereqClasses(Set<CharClassDefinition> prereqClasses) {
         this.prereqClasses = prereqClasses;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        CharClassDefinition other = (CharClassDefinition)obj;
+        if (this.id != null && other.id != null) {
+            return this.id.equals(other.id);
+        }
+        else {
+            return this.name.equals(other.name);
+        }
     }
 }

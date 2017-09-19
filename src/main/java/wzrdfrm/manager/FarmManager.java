@@ -33,6 +33,10 @@ public class FarmManager {
                 plot.setFarm(farm);
                 plot.setRow(row);
                 plot.setCol(col);
+                // set top right plot to unlocked by default
+                if (row == 0 && col == 0) {
+                    plot.setUnlocked(true);
+                }
                 farmPlots.add(plot);
             }
         }
@@ -169,4 +173,5 @@ public class FarmManager {
             matchingConsumable.setQuantity(matchingConsumable.getQuantity() + newConsumable.getQuantity());
         }
     }
+
 }

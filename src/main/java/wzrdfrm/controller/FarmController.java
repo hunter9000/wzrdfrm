@@ -52,6 +52,9 @@ public class FarmController {
         if (farm != null) {
             ClassLevelManager classLevelManager = new ClassLevelManager(farm);
             classLevelManager.setCurrentClassXpLevels();
+
+            Iterable<CharClass> charClasses = charClassRepository.findAllByFarm(farm);
+            classLevelManager.collectCurrentAbilities(charClasses);
         }
 
         return farm;
