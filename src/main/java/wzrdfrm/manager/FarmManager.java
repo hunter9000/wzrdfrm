@@ -59,21 +59,29 @@ public class FarmManager {
         return farm;
     }
 
+    /** Consumes 1 seed of the matching plant type and plants it in the plot */
     public FarmPlot plantCrop(Long plotId, Plant plant) {
         // TODO check seed inventory for quantity
+        Seed plantingSeed = IterableUtils.find(farm.getSeedInventory(), (Seed seed) -> seed.getPlant().getId().equals(plant.getId()) );
+        if (plantingSeed == null) {
+            throw new BadRequestException();
+        }
+        if (plantingSeed.getQuantity() < 1) {
+            throw new BadRequestException();
+        }
 
         FarmPlot farmPlot = getFarmPlotById(plotId);
         if (farmPlot == null) {
             throw new BadRequestException();
         }
-
         if (farmPlot.getPlant() != null) {
             throw new BadRequestException();
         }
+
         farmPlot.setPlant(plant);
         farmPlot.setPlantDate(new Date());
 
-        // TODO decrement the inventory here
+        this.removeSeedFromInventory(plantingSeed, 1);
 
         return farmPlot;
     }
@@ -134,6 +142,20 @@ public class FarmManager {
         }
         else {
             matchingSeed.setQuantity(matchingSeed.getQuantity() + newSeed.getQuantity());
+        }
+    }
+
+    /** Takes the given quantity from the given seed, removing the seed from inventory if new quantity is 0 */
+    private void removeSeedFromInventory(Seed seed, Integer quantity) {
+        if (seed.getQuantity() < quantity) {
+            throw new BadRequestException();
+        }
+        Integer newQuantity = seed.getQuantity() - quantity;
+        if (newQuantity == 0) {
+            farm.getSeedInventory().remove(seed);
+        }
+        else {
+            seed.setQuantity(newQuantity);
         }
     }
 
