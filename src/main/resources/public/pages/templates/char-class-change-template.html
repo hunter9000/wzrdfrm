@@ -4,15 +4,21 @@
 </div>
 
 <div class="modal-body">
+
+    <div>
+        Class unlock orbs: {{numClassUnlockOrbs}}
+    </div>
+
     <div ng-repeat="charClass in charClasses"
          ng-mouseenter="hover = true"
          ng-mouseleave="hover = false"
-         ng-class="{'class-select-current-class': isCurrentClass(charClass), 'class-select-hover-class': hover && !isCurrentClass(charClass) }">
+         ng-class="{'class-select-current-class': isCurrentClass(charClass), 'class-select-hover-class': hover && !isCurrentClass(charClass) && charClass.unlocked }"
+         class="char-class-wrapper">
 
         <class-level char-class="charClass" />
 
-        <button class="btn btn-secondary" ng-show="charClass.unlocked && currCharClass.id != charClass.id" ng-click="switchTo(charClass)">Switch to</button>
-        <button class="btn btn-secondary" ng-show="!charClass.unlocked" ng-click="unlock(charClass)">Unlock for {{charClass.charClassDefinition.orbsToUnlock}}</button>
+        <button class="btn btn-secondary class-button" ng-show="charClass.unlocked && currCharClass.id != charClass.id" ng-click="switchTo(charClass)">Switch to</button>
+        <button class="btn btn-secondary class-button"  ng-show="!charClass.unlocked" ng-disabled="!charClass.canBeUnlocked" ng-click="unlock(charClass)">Unlock for {{charClass.charClassDefinition.orbsToUnlock}}</button>
 
     </div>
 </div>

@@ -1,10 +1,7 @@
 package wzrdfrm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wzrdfrm.manager.CharClassManager;
 import wzrdfrm.manager.ClassLevelManager;
 import wzrdfrm.model.classes.CharClass;
@@ -35,7 +32,7 @@ public class CharClassController {
     @Autowired
     private HttpServletRequest request;
 
-    @RequestMapping(value = "/api/farm/classes/", method = RequestMethod.GET)
+    @GetMapping(value = "/api/farm/classes/")
     public CharClassInfoResponse getCharClassInfo() {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
@@ -43,14 +40,20 @@ public class CharClassController {
         Iterable<CharClass> charClasses = charClassRepository.findAllByFarm(farm);
 
         ClassLevelManager classLevelManager = new ClassLevelManager(farm);
+        CharClassManager charClassManager = new CharClassManager(farm, charClasses);
+
+        // calculate xp needed for each class to level up
         classLevelManager.setAllClassXpLevels(charClasses);
 
-        CharClassInfoResponse charClassInfoResponse = new CharClassInfoResponse(farm.getCurrCharClass(), charClasses);
+        // calculate if each class can be unlocked
+        charClassManager.setAllClassUnlockable();
+
+        CharClassInfoResponse charClassInfoResponse = new CharClassInfoResponse(farm.getCurrCharClass(), charClasses, farm.getNumUnlockOrbs());
 
         return charClassInfoResponse;
     }
 
-    @RequestMapping(value = "/api/farm/classes/", method = RequestMethod.PUT)
+    @PutMapping(value = "/api/farm/classes/")
     public CharClass changeCharClass(@RequestBody CharClassRequest charClassRequest) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
@@ -77,7 +80,7 @@ public class CharClassController {
         return charClass;
     }
 
-    @RequestMapping(value = "/api/farm/classes/", method = RequestMethod.POST)
+    @PostMapping(value = "/api/farm/classes/")
     public CharClass unlockCharClass(@RequestBody CharClassRequest charClassRequest) {
         User user = AuthUtils.getLoggedInUser(request);
         Farm farm = farmRepository.findAllByOwner(user);
@@ -92,10 +95,13 @@ public class CharClassController {
             throw new BadRequestException();
         }
 
-        // TODO can this class be unlocked?
+        if (!charClassManager.isCharClassUnlockable(charClass)) {
+            throw new BadRequestException();
+        }
 
         // unlock the class
         charClass.setUnlocked(true);
+        farm.setNumUnlockOrbs(farm.getNumUnlockOrbs() - charClass.getCharClassDefinition().getOrbsToUnlock());
 
         charClassRepository.save(charClass);
 

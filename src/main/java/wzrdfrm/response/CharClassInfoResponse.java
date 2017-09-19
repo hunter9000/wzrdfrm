@@ -6,10 +6,12 @@ public class CharClassInfoResponse {
 
     public CharClass currCharClass;
     public Iterable<CharClass> allCharClasses;
+    public Integer numClassUnlockOrbs;
 
-    public CharClassInfoResponse(CharClass currCharClass, Iterable<CharClass> allCharClasses) {
+    public CharClassInfoResponse(CharClass currCharClass, Iterable<CharClass> allCharClasses, Integer numClassUnlockOrbs) {
         this.currCharClass = currCharClass;
         this.allCharClasses = allCharClasses;
+        this.numClassUnlockOrbs = numClassUnlockOrbs;
     }
 
     public CharClass getCurrCharClass() {

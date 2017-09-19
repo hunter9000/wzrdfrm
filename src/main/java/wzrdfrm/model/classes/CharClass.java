@@ -38,9 +38,9 @@ public class CharClass {
     @JsonProperty
     private Integer xpNeededToLevel;
 
-//    public Integer xpNeededToLevel() {
-//
-//    }
+    @Transient
+//    @JsonProperty
+    private Boolean canBeUnlocked = false;
 
     public Long getId() {
         return id;
@@ -91,6 +91,13 @@ public class CharClass {
         this.xpNeededToLevel = xpNeededToLevel;
     }
 
+    public Boolean getCanBeUnlocked() {
+        return canBeUnlocked;
+    }
+    public void setCanBeUnlocked(Boolean canBeUnlocked) {
+        this.canBeUnlocked = canBeUnlocked;
+    }
+
     @Override
     public boolean equals(Object obj) {
         CharClass other = (CharClass)obj;
@@ -108,5 +115,10 @@ public class CharClass {
             return 0;
         }
         return this.id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return charClassDefinition.getName();
     }
 }

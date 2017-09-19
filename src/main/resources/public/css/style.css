@@ -68,7 +68,9 @@ div.scroll-item {
     padding: 5px;
 }
 
-
+.char-class-wrapper {
+    height: 40px;
+}
 .class-level-wrapper {
     display: inline-block;
     padding: 5px;
@@ -84,9 +86,22 @@ div.scroll-item {
 .class-xp-bar {
     width: 140px;
     display: inline-block;
+    vertical-align: bottom;
 }
 .class-xp-bar .progress {
     margin-bottom: 0px;
+    position: relative;
+}
+.progress span {
+    position: absolute;
+    display: block;
+    width: 100%;
+    color: black !important;
+ }
+
+.class-button {
+    padding: 4px;
+    margin: 4px;
 }
 
 .class-select-current-class {

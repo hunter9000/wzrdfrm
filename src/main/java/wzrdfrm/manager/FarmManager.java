@@ -100,7 +100,6 @@ public class FarmManager {
             throw new BadRequestException();
         }
 
-        // TODO
         List<HarvestReward> harvestedMaterials = new ArrayList<>();
 
         // get seed rewards
@@ -127,6 +126,11 @@ public class FarmManager {
         Integer numXPOrbs = 2;
         ClassLevelManager classLevelManager = new ClassLevelManager(farm);
         classLevelManager.addXPToCurrentClass(numXPOrbs);
+        harvestedMaterials.add(new XPHarvestReward(numXPOrbs));
+
+        Integer numClassOrbs = 1;
+        farm.setNumUnlockOrbs(farm.getNumUnlockOrbs() + numClassOrbs);
+        harvestedMaterials.add(new ClassOrbHarvestReward(numClassOrbs));
 
         farmPlot.setPlantDate(null);
         farmPlot.setPlant(null);

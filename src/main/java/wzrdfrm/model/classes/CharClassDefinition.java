@@ -31,10 +31,10 @@ public class CharClassDefinition {
     @JsonIgnore
     private Map<Integer, ClassLevel> classLevels;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "char_class_prereq",
-            joinColumns = {@JoinColumn(name = "childClass", nullable = false, updatable = false) },		// column that points to this table
-            inverseJoinColumns = { @JoinColumn(name = "prereqClass", nullable = false, updatable = false) })		// column that points to the other table
+            joinColumns = {@JoinColumn(name = "child_class_definition", nullable = false, updatable = false) },		// column that points to this table
+            inverseJoinColumns = { @JoinColumn(name = "prereq_class_definition", nullable = false, updatable = false) })		// column that points to the other table
     @JsonIgnore
     private Set<CharClassDefinition> prereqClasses;
 
@@ -89,5 +89,18 @@ public class CharClassDefinition {
         else {
             return this.name.equals(other.name);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        if (this.id == null) {
+            return 0;
+        }
+        return this.id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }

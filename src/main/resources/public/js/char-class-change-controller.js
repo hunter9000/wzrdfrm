@@ -4,11 +4,13 @@ wzrdfrmApp.controller('CharClassChangeController', function (APIService, FarmSer
 
     $scope.charClasses;
     $scope.currCharClass;
+    $scope.numClassUnlockOrbs;
 
     ($scope.fetchCharClasses = function() {
         APIService.getAllCharClasses(function(response) {
             $scope.charClasses = response.data.allCharClasses;
             $scope.currCharClass = response.data.currCharClass;
+            $scope.numClassUnlockOrbs = response.data.numClassUnlockOrbs;
         });
     })();
 
