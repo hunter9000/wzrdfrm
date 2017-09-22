@@ -56,6 +56,8 @@
                 <!--</div>-->
 
             </div>
+
+            <!-- character class -->
             <div class="col-md-3">
 
                 <!--<div>-->
@@ -65,6 +67,12 @@
                 <!--</div>-->
 
                 <class-level char-class="farm.currCharClass" />
+
+                <div ng-repeat="abilityResponse in currentClassAbilities">
+                    <span>{{abilityResponse.level}}:</span>
+                    <span>{{abilityResponse.abilityType.name}}</span>
+                    <span>{{abilityResponse.abilityType.description}}</span>
+                </div>
 
                 <button class="btn" ng-click="changeCharClass()">Change class</button>
 

@@ -11,10 +11,13 @@ import wzrdfrm.model.farm.*;
 import wzrdfrm.model.user.User;
 import wzrdfrm.repository.*;
 import wzrdfrm.request.PlantCropRequest;
+import wzrdfrm.response.AbilityResponse;
+import wzrdfrm.response.FarmResponse;
 import wzrdfrm.security.BadRequestException;
 import wzrdfrm.util.AuthUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -44,20 +47,30 @@ public class FarmController {
     private HttpServletRequest request;
 
     @GetMapping(value = "/farm/")
-    public Farm getFarmOwnedByUser() {
+    public FarmResponse getFarmOwnedByUser() {
         User user = AuthUtils.getLoggedInUser(request);
 
         Farm farm = farmRepository.findAllByOwner(user);
+        List<AbilityResponse> currClassAbilities = new ArrayList<>();
 
         if (farm != null) {
             ClassLevelManager classLevelManager = new ClassLevelManager(farm);
             classLevelManager.setCurrentClassXpLevels();
 
+            currClassAbilities = classLevelManager.getAbilities(farm.getCurrCharClass());
+
             Iterable<CharClass> charClasses = charClassRepository.findAllByFarm(farm);
             classLevelManager.collectCurrentAbilities(charClasses);
+
+            FarmManager farmManager = new FarmManager(farm);
+            farmManager.calculateAllHarvestTimes();
         }
 
-        return farm;
+        FarmResponse farmResponse = new FarmResponse();
+        farmResponse.farm = farm;
+        farmResponse.currentClassAbilities = currClassAbilities;
+
+        return farmResponse;
     }
 
     @DeleteMapping(value = "/farm/")
@@ -106,6 +119,7 @@ public class FarmController {
         }
 
         FarmPlot farmPlot = farmManager.plantCrop(plotId, plant);
+        farmManager.calculateHarvestTime(farmPlot);
 
         farmRepository.save(farm);
 

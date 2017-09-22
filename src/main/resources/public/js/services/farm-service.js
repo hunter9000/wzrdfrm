@@ -1,5 +1,5 @@
 
-wzrdfrmApp.factory('FarmService', function(APIService, NotificationService) {
+wzrdfrmApp.factory('FarmService', function(APIService, NotificationService, $rootScope) {
 
     var getPlantCropRequest = function(plant) {
         return {
@@ -7,15 +7,9 @@ wzrdfrmApp.factory('FarmService', function(APIService, NotificationService) {
         };
     };
 
-    var getCharClassRequest = function(charClassId) {
-        return {
-            'charClassId': charClassId
-        }
-    };
-
     var broadcastFarmModifiedCallback = function() {
 //        return function(response) {
-        $rootScope.$broadcast('farm.modified', {});
+        $rootScope.$broadcast('farm.modified');
 //        }
     };
 
@@ -38,6 +32,12 @@ wzrdfrmApp.factory('FarmService', function(APIService, NotificationService) {
 //                $scope.getFarm();
                 broadcastFarmModifiedCallback();
             });
+        },
+
+        getCharClassRequest: function(charClassId) {
+            return {
+                'charClassId': charClassId
+            };
         },
     };
 

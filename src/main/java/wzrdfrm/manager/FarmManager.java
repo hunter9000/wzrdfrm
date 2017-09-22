@@ -178,4 +178,32 @@ public class FarmManager {
         }
     }
 
+    public void calculateAllHarvestTimes() {
+        for (FarmPlot farmPlot : farm.getFarmPlots()) {
+            calculateHarvestTime(farmPlot);
+        }
+    }
+
+    /** Calculates and sets when the plant will be ready to harvest. based on plant grow time, fertilizer, buffs, etc. */
+    public void calculateHarvestTime(FarmPlot farmPlot) {
+        if (farmPlot.getPlant() == null || farmPlot.getPlantDate() == null) {
+            return;
+        }
+
+        // grow time in ms
+        double scaledGrowTime = (double)farmPlot.getPlant().getGrowTimeMilliSeconds();
+
+        // get multiplier for buffs
+        float totalBuffMultiplier = .9f;
+        scaledGrowTime *= totalBuffMultiplier;
+
+        // get multiplier for fertilizers
+        float totalPlotMultiplier = .9f;
+        scaledGrowTime *= totalPlotMultiplier;
+
+        Date endDate = new Date(farmPlot.getPlantDate().toInstant().plusMillis((long)scaledGrowTime).toEpochMilli());
+        farmPlot.setEndDate(endDate);
+
+    }
+
 }

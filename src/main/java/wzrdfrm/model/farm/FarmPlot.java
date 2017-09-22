@@ -1,7 +1,6 @@
 package wzrdfrm.model.farm;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -43,13 +42,8 @@ public class FarmPlot {
     private Boolean unlocked = false;
 
     @Transient
-    @JsonProperty(value = "endDate")
-    public Date getEndDate() {
-        if (getPlantDate() != null && getPlant() != null) {
-            return new Date(getPlantDate().toInstant().plusMillis(this.getPlant().getGrowTimeMilliSeconds()).toEpochMilli());
-        }
-        return null;
-    }
+    private Date endDate;
+
 
     public Long getId() {
         return id;
@@ -100,4 +94,10 @@ public class FarmPlot {
         this.plant = plant;
     }
 
+    public Date getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

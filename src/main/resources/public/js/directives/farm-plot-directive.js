@@ -15,6 +15,7 @@ wzrdfrmApp.directive('farmPlot', function(FarmService) {
                          <!--[{{progressBar}}]-->
                          <div class="progress active {{displayProgressActive}}" ng-show="progressBar > 0">
                              <div class="progress-bar bar" style="width: calc(100% - {{progressBar}}%);">
+                                {{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds
                              </div>
                          </div>
 

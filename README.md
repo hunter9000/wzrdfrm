@@ -244,7 +244,7 @@ TODO
 * add extra resources that can drop
 --* add better ui to show harvested resources
 
-* define ability tables
+--* define ability tables
 * define abilities for a few classes
 * show ui for abilities
 * drag and drop for using abilities on plots
@@ -269,3 +269,5 @@ tier 3: 200 xp for max (hybrid classes that depend on tier 2)
 
 Dependencies:
 http://bootstrap-notify.remabledesigns.com/#documentation
+https://siddii.github.io/angular-timer/
+

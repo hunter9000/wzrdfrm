@@ -1,13 +1,15 @@
 
 wzrdfrmApp.controller('farmController', function(APIService, FarmService, NotificationService, $scope, $location, $uibModal, $log) {
     $scope.farm;
+    $scope.currentClassAbilities;       // [] of AbilityResponse
 
 //    $scope.currTime;
 
     // get the character from the provided id
     ($scope.getFarm = function() {
         APIService.getFarm(function(response) {
-            $scope.farm = response.data;        // might be null
+            $scope.farm = response.data.farm;        // might be null
+            $scope.currentClassAbilities = response.data.currentClassAbilities;
             // map all the plots into a 2d array based on row/col of each plot
             if ($scope.farm) {
                 $scope.farm.farmPlots = $scope.farm.farmPlots.reduce(function(accumulator, currentValue, currentIndex, array) {
@@ -18,14 +20,11 @@ wzrdfrmApp.controller('farmController', function(APIService, FarmService, Notifi
                     accumulator[currentValue.row][currentValue.col] = currentValue;
                     return accumulator;
                 }, []);
-				
-
             }
         });
     })();
 
-    $scope.$on("farm.modified", function(e, kvp){
-        alert('getting farm now!');
+    $scope.$on('farm.modified', function(e, kvp){
         $scope.getFarm();
     });
 

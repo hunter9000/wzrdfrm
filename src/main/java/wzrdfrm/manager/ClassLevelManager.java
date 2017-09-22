@@ -6,6 +6,7 @@ import wzrdfrm.model.classes.CharClass;
 import wzrdfrm.model.classes.ClassLevel;
 import wzrdfrm.model.farm.Farm;
 import wzrdfrm.model.farm.FarmPlot;
+import wzrdfrm.response.AbilityResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,5 +112,18 @@ public class ClassLevelManager {
         farmPlot.setUnlocked(true);
     }
 
+    /** Gets the abilities that the current class has */
+    public List<AbilityResponse> getAbilities(CharClass charClass) {
+        List<AbilityResponse> abilities = new ArrayList<>();
 
+        Map<Integer, ClassLevel> levels = charClass.getCharClassDefinition().getClassLevels();
+        for (int i=1; i<=charClass.getCurrentLevel(); i++) {
+            ClassLevel level = levels.get(i);
+            if (level.getAbilityType() != null) {
+                abilities.add(new AbilityResponse(level.getAbilityType(), i));
+            }
+        }
+
+        return abilities;
+    }
 }
